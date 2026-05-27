@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Anvaye - One stop shop for your wish-list. E-commerce website for all your needs.">
+    <title>Anvaye - Your Wish-List Destination</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#home" class="logo">Anvaye</a>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Orders</a></li>
+                <li><a href="#cart" class="nav-link">Cart</a></li>
+                <li><a href="#explore" class="nav-link">Explore</a></li>
+                <li><a href="#contact" class="nav-link btn-primary">Sign In/Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title animate-fade-in">One stop shop for your wish-list</h1>
+                <p class="hero-subtitle animate-fade-in-delay">Anvaye is one stop shop for the wish-list you have had</p>
+                <a href="#explore" class="btn btn-large animate-fade-in-delay-2">Start Shopping</a>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-card card-1"></div>
+                <div class="floating-card card-2"></div>
+                <div class="floating-card card-3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Anvaye</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="about-content">
+                <p>Anvaye is one stop shop for the wish-list you have had. We bring together everything you've been dreaming of in one convenient e-commerce platform.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>What We Offer</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">🛍️</div>
+                    <h3>E-commerce Platform</h3>
+                    <p>Browse, shop, and fulfill your wish-list with our complete e-commerce solution</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">📦</div>
+                    <h3>Easy Order Management</h3>
+                    <p>Track all your orders in one place with real-time updates</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">🔍</div>
+                    <h3>Explore Collections</h3>
+                    <p>Discover curated collections tailored to your interests and dreams</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart/Explore Section -->
+    <section class="explore" id="explore">
+        <div class="container">
+            <div class="section-header">
+                <h2>Ready to Explore?</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="explore-content">
+                <p>Your wish-list is waiting. Start browsing our collections and make your dreams a reality.</p>
+                <a href="#contact" class="btn btn-large">Get Started Today</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get in Touch</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-icon">✉️</span>
+                        <a href="mailto:anvaye-in@slkjijhk.com">anvaye-in@slkjijhk.com</a>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit" class="btn btn-large">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Anvaye. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
