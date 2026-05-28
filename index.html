@@ -1,137 +1,1286 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Anvaye - One stop shop for your wish-list. E-commerce website for all your needs.">
-    <title>Anvaye - Your Wish-List Destination</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anvaye — One Stop Shop for Your Wish-List</title>
+  <meta name="description" content="Anvaye is your one-stop e-commerce platform. Discover unique sellers, shop securely, and fulfill your wish-list with ease." />
+  <meta name="keywords" content="anvaye, e-commerce, online shopping, wish-list, verified sellers, secure payments, india, upi" />
+  <meta name="author" content="Anvaye" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://anvaye.com/" />
+  <meta property="og:title"       content="Anvaye — One Stop Shop for Your Wish-List" />
+  <meta property="og:description" content="Discover unique sellers, shop securely, and fulfill your wish-list with Anvaye." />
+  <meta property="og:image"       content="https://anvaye.com/og-image.jpg" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card"        content="summary_large_image" />
+  <meta property="twitter:title"       content="Anvaye — One Stop Shop for Your Wish-List" />
+  <meta property="twitter:description" content="Discover unique sellers and fulfill your wish-list with Anvaye." />
+
+  <!-- PWA -->
+  <link rel="manifest"   href="/manifest.json" />
+  <meta name="theme-color" content="#FF5C2B" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/main.css" />
+
+  <style>
+    /* ── HERO ── */
+    .hero {
+      min-height:  100vh;
+      background:  var(--bg-dark);
+      display:     flex;
+      align-items: center;
+      padding-top: 80px;
+      position:    relative;
+      overflow:    hidden;
+    }
+
+    .hero::before {
+      content:   '';
+      position:  absolute;
+      inset:     0;
+      background:
+        radial-gradient(ellipse at 15% 50%, rgba(255,92,43,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 30%, rgba(239,159,39,0.10) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 90%, rgba(255,92,43,0.08) 0%, transparent 55%);
+      animation: bgPulse 8s ease-in-out infinite;
+    }
+
+    @keyframes bgPulse {
+      0%, 100% { opacity: 1;   }
+      50%       { opacity: 0.6; }
+    }
+
+    .hero::after {
+      content:    '';
+      position:   absolute;
+      inset:      0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events:  none;
+    }
+
+    .hero-inner {
+      position:   relative;
+      z-index:    1;
+      text-align: center;
+      padding:    0 24px;
+    }
+
+    .hero-eyebrow {
+      display:       inline-flex;
+      align-items:   center;
+      gap:           8px;
+      font-size:     12px;
+      font-weight:   600;
+      color:         rgba(255,255,255,0.5);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      background:    rgba(255,255,255,0.05);
+      border:        1px solid rgba(255,255,255,0.08);
+      padding:       6px 16px;
+      border-radius: 20px;
+      animation:     fadeIn 0.6s ease;
+    }
+
+    .hero-eyebrow span {
+      width:         6px;
+      height:        6px;
+      border-radius: 50%;
+      background:    var(--brand);
+      animation:     pulse-glow 2s infinite;
+    }
+
+    .hero h1 {
+      color:         #fff;
+      margin-bottom: 20px;
+      animation:     fadeUp 0.7s ease 0.1s both;
+    }
+
+    .hero-sub {
+      font-size:     20px;
+      color:         rgba(255,255,255,0.6);
+      max-width:     560px;
+      margin:        0 auto 48px;
+      line-height:   1.7;
+      animation:     fadeUp 0.7s ease 0.2s both;
+    }
+
+    .hero-actions {
+      display:         flex;
+      gap:             16px;
+      justify-content: center;
+      flex-wrap:       wrap;
+      margin-bottom:   64px;
+      animation:       fadeUp 0.7s ease 0.3s both;
+    }
+
+    .hero-stats {
+      display:         flex;
+      gap:             48px;
+      justify-content: center;
+      flex-wrap:       wrap;
+      animation:       fadeUp 0.7s ease 0.4s both;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat-val {
+      font-size:   32px;
+      font-weight: 800;
+      color:       #fff;
+    }
+
+    .hero-stat-lbl {
+      font-size:  13px;
+      color:      rgba(255,255,255,0.45);
+      margin-top: 4px;
+    }
+
+    .hero-scroll {
+      position:   absolute;
+      bottom:     32px;
+      left:       50%;
+      transform:  translateX(-50%);
+      z-index:    1;
+      display:    flex;
+      flex-direction: column;
+      align-items:    center;
+      gap:        8px;
+      color:      rgba(255,255,255,0.3);
+      font-size:  11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      animation:  fadeIn 1s ease 1s both;
+    }
+
+    .scroll-line {
+      width:         1px;
+      height:        40px;
+      background:    linear-gradient(180deg, rgba(255,255,255,0.3), transparent);
+      animation:     scrollLine 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      0%   { transform: scaleY(0); transform-origin: top;    }
+      50%  { transform: scaleY(1); transform-origin: top;    }
+      51%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ── ROLE SECTION ── */
+    .role-section {
+      background: var(--bg-dark);
+      padding:    0 0 100px;
+    }
+
+    .role-grid {
+      display:               grid;
+      grid-template-columns: 1fr 1fr;
+      gap:                   24px;
+      max-width:             900px;
+      margin:                0 auto;
+      padding:               0 24px;
+    }
+
+    .role-card {
+      background:    var(--bg-dark-2);
+      border-radius: var(--r-xl);
+      border:        1px solid rgba(255,255,255,0.06);
+      padding:       40px 32px;
+      cursor:        pointer;
+      transition:    all var(--speed) var(--ease);
+      text-align:    left;
+      text-decoration: none;
+      display:       block;
+      position:      relative;
+      overflow:      hidden;
+    }
+
+    .role-card::before {
+      content:    '';
+      position:   absolute;
+      inset:      0;
+      opacity:    0;
+      transition: opacity var(--speed);
+    }
+
+    .role-card-buyer::before {
+      background: radial-gradient(ellipse at 0% 100%, rgba(255,92,43,0.15), transparent 70%);
+    }
+
+    .role-card-seller::before {
+      background: radial-gradient(ellipse at 0% 100%, rgba(29,158,117,0.15), transparent 70%);
+    }
+
+    .role-card:hover {
+      transform:    translateY(-8px);
+      border-color: rgba(255,255,255,0.12);
+      box-shadow:   0 24px 60px rgba(0,0,0,0.4);
+    }
+
+    .role-card:hover::before { opacity: 1; }
+
+    .role-card-icon {
+      width:           64px;
+      height:          64px;
+      border-radius:   18px;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      font-size:       32px;
+      margin-bottom:   24px;
+      position:        relative;
+      z-index:         1;
+    }
+
+    .role-icon-buyer  { background: var(--brand-dim); }
+    .role-icon-seller { background: var(--green-dim); }
+
+    .role-card-title {
+      font-size:     24px;
+      font-weight:   800;
+      color:         #fff;
+      margin-bottom: 10px;
+      position:      relative;
+      z-index:       1;
+    }
+
+    .role-card-desc {
+      font-size:   15px;
+      color:       rgba(255,255,255,0.5);
+      line-height: 1.6;
+      margin-bottom: 28px;
+      position:    relative;
+      z-index:     1;
+    }
+
+    .role-card-cta {
+      display:     inline-flex;
+      align-items: center;
+      gap:         8px;
+      font-size:   14px;
+      font-weight: 600;
+      position:    relative;
+      z-index:     1;
+      transition:  gap var(--speed);
+    }
+
+    .role-card-buyer  .role-card-cta { color: var(--brand); }
+    .role-card-seller .role-card-cta { color: var(--green); }
+
+    .role-card:hover .role-card-cta { gap: 14px; }
+
+    /* ── FEATURES ── */
+    .features-grid {
+      display:               grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:                   24px;
+    }
+
+    .feature-card {
+      background:    var(--bg-secondary);
+      border-radius: var(--r-lg);
+      border:        1px solid var(--border-primary);
+      padding:       28px;
+      transition:    all var(--speed) var(--ease);
+      position:      relative;
+      overflow:      hidden;
+    }
+
+    .feature-card::after {
+      content:    '';
+      position:   absolute;
+      bottom:     0;
+      left:       0;
+      right:      0;
+      height:     3px;
+      background: linear-gradient(90deg, var(--brand), var(--amber));
+      transform:  scaleX(0);
+      transition: transform var(--speed);
+    }
+
+    .feature-card:hover {
+      transform:  translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .feature-card:hover::after { transform: scaleX(1); }
+
+    .feature-icon {
+      width:           52px;
+      height:          52px;
+      border-radius:   14px;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      font-size:       26px;
+      margin-bottom:   18px;
+    }
+
+    .feature-title {
+      font-size:     16px;
+      font-weight:   700;
+      color:         var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .feature-desc {
+      font-size:  14px;
+      color:      var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .hiw-grid {
+      display:               grid;
+      grid-template-columns: 1fr 1fr;
+      gap:                   80px;
+      align-items:           start;
+    }
+
+    .hiw-side-title {
+      font-size:     13px;
+      font-weight:   700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 32px;
+      display:       flex;
+      align-items:   center;
+      gap:           10px;
+    }
+
+    .hiw-buyer-title  { color: var(--brand); }
+    .hiw-seller-title { color: var(--green); }
+
+    .hiw-step {
+      display:     flex;
+      gap:         16px;
+      align-items: flex-start;
+      margin-bottom: 28px;
+      position:    relative;
+    }
+
+    .hiw-step:not(:last-child)::after {
+      content:    '';
+      position:   absolute;
+      left:       19px;
+      top:        42px;
+      width:      2px;
+      height:     calc(100% - 14px);
+      background: linear-gradient(180deg, var(--border-secondary), transparent);
+    }
+
+    .hiw-num {
+      width:           40px;
+      height:          40px;
+      border-radius:   50%;
+      font-size:       15px;
+      font-weight:     800;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      flex-shrink:     0;
+      position:        relative;
+      z-index:         1;
+    }
+
+    .hiw-num-buyer  { background: var(--brand-dim); color: var(--brand); }
+    .hiw-num-seller { background: var(--green-dim); color: var(--green); }
+
+    .hiw-step-title {
+      font-size:     15px;
+      font-weight:   600;
+      color:         var(--text-primary);
+      margin-bottom: 4px;
+      padding-top:   8px;
+    }
+
+    .hiw-step-desc {
+      font-size:  13px;
+      color:      var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── TRUST STRIP ── */
+    .trust-strip {
+      background:  var(--bg-dark);
+      padding:     60px 0;
+      text-align:  center;
+      overflow:    hidden;
+    }
+
+    .trust-label {
+      font-size:      11px;
+      font-weight:    600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color:          rgba(255,255,255,0.3);
+      margin-bottom:  32px;
+    }
+
+    .trust-items {
+      display:         flex;
+      gap:             48px;
+      justify-content: center;
+      flex-wrap:       wrap;
+    }
+
+    .trust-item {
+      display:     flex;
+      align-items: center;
+      gap:         10px;
+      font-size:   14px;
+      font-weight: 500;
+      color:       rgba(255,255,255,0.5);
+    }
+
+    .trust-item i { font-size: 20px; color: var(--brand); }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-grid {
+      display:               grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:                   24px;
+    }
+
+    .testimonial-card {
+      background:    var(--bg-secondary);
+      border-radius: var(--r-lg);
+      border:        1px solid var(--border-primary);
+      padding:       28px;
+      transition:    all var(--speed) var(--ease);
+    }
+
+    .testimonial-card:hover {
+      transform:  translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .testimonial-stars {
+      color:         var(--amber);
+      font-size:     16px;
+      margin-bottom: 14px;
+      letter-spacing: 2px;
+    }
+
+    .testimonial-text {
+      font-size:     15px;
+      color:         var(--text-primary);
+      line-height:   1.7;
+      margin-bottom: 20px;
+      font-style:    italic;
+    }
+
+    .testimonial-author {
+      display:     flex;
+      align-items: center;
+      gap:         12px;
+    }
+
+    .testimonial-av {
+      width:           40px;
+      height:          40px;
+      border-radius:   50%;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      font-size:       14px;
+      font-weight:     700;
+      flex-shrink:     0;
+    }
+
+    .testimonial-name {
+      font-size:   14px;
+      font-weight: 600;
+      color:       var(--text-primary);
+    }
+
+    .testimonial-role {
+      font-size:  12px;
+      color:      var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background:  var(--bg-dark);
+      padding:     120px 0;
+      text-align:  center;
+      position:    relative;
+      overflow:    hidden;
+    }
+
+    .cta-section::before {
+      content:   '';
+      position:  absolute;
+      inset:     0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(255,92,43,0.15) 0%, transparent 70%);
+    }
+
+    .cta-section h2 {
+      color:         #fff;
+      margin-bottom: 16px;
+      position:      relative;
+      z-index:       1;
+    }
+
+    .cta-section p {
+      color:         rgba(255,255,255,0.55);
+      font-size:     18px;
+      margin-bottom: 40px;
+      position:      relative;
+      z-index:       1;
+    }
+
+    .cta-actions {
+      display:         flex;
+      gap:             16px;
+      justify-content: center;
+      flex-wrap:       wrap;
+      position:        relative;
+      z-index:         1;
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display:               grid;
+      grid-template-columns: 1fr 1fr;
+      gap:                   80px;
+      align-items:           start;
+    }
+
+    .contact-info-title {
+      font-size:     28px;
+      font-weight:   800;
+      color:         var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .contact-info-sub {
+      font-size:     16px;
+      color:         var(--text-secondary);
+      line-height:   1.7;
+      margin-bottom: 32px;
+    }
+
+    .contact-detail {
+      display:       flex;
+      align-items:   center;
+      gap:           14px;
+      margin-bottom: 16px;
+    }
+
+    .contact-detail-icon {
+      width:           44px;
+      height:          44px;
+      border-radius:   12px;
+      background:      var(--brand-dim);
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      font-size:       20px;
+      flex-shrink:     0;
+    }
+
+    .contact-detail-label {
+      font-size:   12px;
+      color:       var(--text-secondary);
+      margin-bottom: 2px;
+    }
+
+    .contact-detail-val {
+      font-size:   15px;
+      font-weight: 600;
+      color:       var(--text-primary);
+    }
+
+    .contact-form-wrap {
+      background:    var(--bg-secondary);
+      border-radius: var(--r-xl);
+      border:        1px solid var(--border-primary);
+      padding:       36px;
+    }
+
+    .contact-form-title {
+      font-size:     20px;
+      font-weight:   700;
+      color:         var(--text-primary);
+      margin-bottom: 24px;
+    }
+
+    .contact-form {
+      display:        flex;
+      flex-direction: column;
+      gap:            16px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap:     16px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .features-grid      { grid-template-columns: 1fr 1fr; }
+      .testimonials-grid  { grid-template-columns: 1fr 1fr; }
+      .hiw-grid           { gap: 48px; }
+    }
+
+    @media (max-width: 768px) {
+      .role-grid          { grid-template-columns: 1fr; }
+      .features-grid      { grid-template-columns: 1fr; }
+      .hiw-grid           { grid-template-columns: 1fr; }
+      .testimonials-grid  { grid-template-columns: 1fr; }
+      .contact-grid       { grid-template-columns: 1fr; gap: 40px; }
+      .form-row           { grid-template-columns: 1fr; }
+      .hero-stats         { gap: 28px; }
+      .trust-items        { gap: 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions { flex-direction: column; align-items: center; }
+      .cta-actions  { flex-direction: column; align-items: center; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="container">
-            <a href="#home" class="logo">Anvaye</a>
-            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
+
+  <!-- ═══════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="/" class="nav-logo">Anvaye</a>
+
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="faq.html">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="nav-signin" onclick="window.location.href='#join'">
+          Sign in
+        </button>
+        <a href="#join" class="btn btn-primary btn-sm">Get started</a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="nav-mobile" id="navMobile">
+    <button class="nav-mobile-close" id="navMobileClose">✕</button>
+    <a href="#features">Features</a>
+    <a href="#how-it-works">How it works</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="faq.html">FAQ</a>
+    <a href="#contact">Contact</a>
+    <a href="#join" class="btn btn-primary">Get started</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <section class="hero" id="home">
+    <div class="container" style="width:100%">
+      <div class="hero-inner">
+
+        <div class="hero-eyebrow">
+          <span></span>
+          Now live in India
+        </div>
+
+        <h1>One stop shop for<br /><span class="glow-text">your wish-list</span></h1>
+
+        <p class="hero-sub">
+          Discover unique Instagram sellers, shop securely via UPI,
+          and get everything on your wish-list — all in one place.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#join" class="btn btn-primary btn-lg">
+            Start shopping
+            <i class="ti ti-arrow-right"></i>
+          </a>
+          <a href="how-it-works.html" class="btn btn-dark btn-lg">
+            How it works
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div
+              class="hero-stat-val"
+              data-target="2400"
+              data-suffix="+"
+            >0+</div>
+            <div class="hero-stat-lbl">Verified sellers</div>
+          </div>
+          <div class="hero-stat">
+            <div
+              class="hero-stat-val"
+              data-target="18000"
+              data-suffix="+"
+            >0+</div>
+            <div class="hero-stat-lbl">Happy buyers</div>
+          </div>
+          <div class="hero-stat">
+            <div
+              class="hero-stat-val"
+              data-target="96"
+              data-suffix="%"
+            >0%</div>
+            <div class="hero-stat-lbl">Satisfaction rate</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      scroll
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       JOIN AS — ROLE SELECTION
+  ═══════════════════════════════════════════ -->
+  <section class="role-section" id="join">
+    <div class="container">
+      <div class="section-header" style="color:#fff">
+        <div class="section-tag">Get started</div>
+        <h2 style="color:#fff">Join Anvaye as</h2>
+        <p style="color:rgba(255,255,255,0.5);max-width:480px;margin:0 auto">
+          Choose your role to get started. You can always switch later.
+        </p>
+      </div>
+
+      <div class="role-grid">
+
+        <!-- Buyer -->
+        <a href="buyer/index.html" class="role-card role-card-buyer reveal">
+          <div class="role-card-icon role-icon-buyer">🛍️</div>
+          <div class="role-card-title">I'm a Buyer</div>
+          <div class="role-card-desc">
+            Discover handpicked Instagram sellers, browse their collections,
+            and order securely via UPI. Verified reviews. Real sellers.
+          </div>
+          <div class="role-card-cta">
+            Shop now
+            <i class="ti ti-arrow-right"></i>
+          </div>
+        </a>
+
+        <!-- Seller -->
+        <a href="seller/index.html" class="role-card role-card-seller reveal delay-2">
+          <div class="role-card-icon role-icon-seller">🏪</div>
+          <div class="role-card-title">I'm a Seller</div>
+          <div class="role-card-desc">
+            List your products, reach thousands of buyers, and receive
+            payments directly via UPI. Only 3% per sale. No monthly fees.
+          </div>
+          <div class="role-card-cta">
+            Start selling
+            <i class="ti ti-arrow-right"></i>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       TRUST STRIP
+  ═══════════════════════════════════════════ -->
+  <div class="trust-strip">
+    <div class="trust-label">Trusted by buyers and sellers across India</div>
+    <div class="trust-items">
+      <div class="trust-item">
+        <i class="ti ti-shield-check"></i>
+        Verified sellers only
+      </div>
+      <div class="trust-item">
+        <i class="ti ti-lock"></i>
+        Secured by Razorpay
+      </div>
+      <div class="trust-item">
+        <i class="ti ti-star"></i>
+        Tamper-proof reviews
+      </div>
+      <div class="trust-item">
+        <i class="ti ti-truck"></i>
+        Real-time order tracking
+      </div>
+      <div class="trust-item">
+        <i class="ti ti-headset"></i>
+        24/7 support
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       FEATURES
+  ═══════════════════════════════════════════ -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Why Anvaye</div>
+        <h2>Everything you need,<br />nothing you don't</h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="features-grid">
+
+        <div class="feature-card reveal">
+          <div class="feature-icon" style="background:var(--brand-dim)">🛍️</div>
+          <div class="feature-title">Curated Instagram Sellers</div>
+          <div class="feature-desc">
+            Every seller on Anvaye is verified and reviewed by real buyers.
+            No fakes, no scams — just genuine products.
+          </div>
+        </div>
+
+        <div class="feature-card reveal delay-1">
+          <div class="feature-icon" style="background:var(--green-dim)">💸</div>
+          <div class="feature-title">Direct UPI Payments</div>
+          <div class="feature-desc">
+            Pay directly to sellers via UPI. No middlemen holding your money.
+            Instant, secure, and hassle-free.
+          </div>
+        </div>
+
+        <div class="feature-card reveal delay-2">
+          <div class="feature-icon" style="background:var(--amber-dim)">⭐</div>
+          <div class="feature-title">Verified Reviews</div>
+          <div class="feature-desc">
+            Only buyers who actually purchased can leave reviews.
+            Your rating is real and tamper-proof.
+          </div>
+        </div>
+
+        <div class="feature-card reveal delay-1">
+          <div class="feature-icon" style="background:var(--blue-dim)">📦</div>
+          <div class="feature-title">Real-Time Order Tracking</div>
+          <div class="feature-desc">
+            Track every order from confirmation to delivery.
+            Get notified at every step of the journey.
+          </div>
+        </div>
+
+        <div class="feature-card reveal delay-2">
+          <div class="feature-icon" style="background:var(--purple-dim)">🔐</div>
+          <div class="feature-title">Anvaye Pass</div>
+          <div class="feature-desc">
+            Subscribe for ₹50 and unlock unlimited access to all sellers
+            for 15 days. No per-order platform fee.
+          </div>
+        </div>
+
+        <div class="feature-card reveal delay-3">
+          <div class="feature-icon" style="background:var(--red-dim)">📱</div>
+          <div class="feature-title">Mobile First</div>
+          <div class="feature-desc">
+            Built for India. Works beautifully on any device.
+            Fast, lightweight, and works on slow connections too.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       HOW IT WORKS
+  ═══════════════════════════════════════════ -->
+  <section class="section" id="how-it-works" style="background:var(--bg-secondary)">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">How it works</div>
+        <h2>Simple for everyone</h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="hiw-grid">
+
+        <!-- Buyer side -->
+        <div class="reveal-left">
+          <div class="hiw-side-title hiw-buyer-title">
+            <i class="ti ti-shopping-bag"></i>
+            For Buyers
+          </div>
+
+          <div class="hiw-step">
+            <div class="hiw-num hiw-num-buyer">1</div>
+            <div>
+              <div class="hiw-step-title">Sign up with your phone</div>
+              <div class="hiw-step-desc">
+                Quick OTP verification. No passwords, no hassle.
+              </div>
+            </div>
+          </div>
+
+          <div class="hiw-step">
+            <div class="hiw-num hiw-num-buyer">2</div>
+            <div>
+              <div class="hiw-step-title">Browse verified sellers</div>
+              <div class="hiw-step-desc">
+                Discover Instagram sellers with real reviews and verified products.
+              </div>
+            </div>
+          </div>
+
+          <div class="hiw-step">
+            <div class="hiw-num hiw-num-buyer">3</div>
+            <div>
+              <div class="hiw-step-title">Pay directly via UPI</div>
+              <div class="hiw-step-desc">
+                Money goes straight to the seller. No holding, no delays.
+              </div>
+            </div>
+          </div>
+
+          <div class="hiw-step">
+            <div class="hiw-num hiw-num-buyer">4</div>
+            <div>
+              <div class="hiw-step-title">Track & review</div>
+              <div class="hiw-step-desc">
+                Follow your order in real-time and leave a verified review.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seller side -->
+        <div class="reveal-right">
+          <div class="hiw-side-title hiw-seller-title">
+            <i class="ti ti-store"></i>
+            For Sellers
+          </div>
+
+          <div class="hiw-step">
+            <div class="hiw-num hiw-num-seller">1</div>
+            <div>
+              <div class="hiw-step-title">Connect your Instagram</div>
+              <div class="hiw-step-desc">
+                Your Instagram handle becomes your store identity on Anvaye.
+              </div>
+            </div>
+          </div>
+
+          <div class="hiw-step">
+            <div class="hiw-num hiw-num-seller">2</div>
+            <div>
+              <div class="hiw-step-title">List your products</div>
+              <div class="hiw-step-desc">
+                Add products with photos, prices, and descriptions in minutes.
+              </div>
+            </div>
+          </div>
+
+          <div class="hiw-step">
+            <div class="hiw-num hiw-num-seller">3</div>
+            <div>
+              <div class="hiw-step-title">Receive orders & payments</div>
+              <div class="hiw-step-desc">
+                Buyers pay directly to you via UPI. Only 3% per successful sale.
+              </div>
+            </div>
+          </div>
+
+          <div class="hiw-step">
+            <div class="hiw-num hiw-num-seller">4</div>
+            <div>
+              <div class="hiw-step-title">Build your reputation</div>
+              <div class="hiw-step-desc">
+                Grow your rating with tamper-proof verified reviews from real buyers.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       TESTIMONIALS
+  ═══════════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Testimonials</div>
+        <h2>Loved across India</h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-text">
+            "Finally an app that lets me order from my favourite Instagram sellers
+            without worrying about scams. The verified reviews are a game changer!"
+          </div>
+          <div class="testimonial-author">
+            <div class="testimonial-av" style="background:var(--brand-dim);color:var(--brand)">PM</div>
+            <div>
+              <div class="testimonial-name">Priya M.</div>
+              <div class="testimonial-role">Buyer · Hyderabad</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal delay-1">
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-text">
+            "My sales tripled after joining Anvaye. The 3% fee is so much better
+            than other platforms. Direct UPI payments mean no waiting!"
+          </div>
+          <div class="testimonial-author">
+            <div class="testimonial-av" style="background:var(--green-dim);color:var(--green)">CR</div>
+            <div>
+              <div class="testimonial-name">Crochet by Riya</div>
+              <div class="testimonial-role">Seller · Hyderabad</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal delay-2">
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-text">
+            "Ordered a handmade tote bag and it arrived exactly as shown.
+            The order tracking kept me updated the whole time. Love Anvaye!"
+          </div>
+          <div class="testimonial-author">
+            <div class="testimonial-av" style="background:var(--purple-dim);color:var(--purple)">AS</div>
+            <div>
+              <div class="testimonial-name">Aarav S.</div>
+              <div class="testimonial-role">Buyer · Mumbai</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       CTA
+  ═══════════════════════════════════════════ -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to fulfill<br />your wish-list?</h2>
+      <p>Join thousands of buyers and sellers already on Anvaye</p>
+      <div class="cta-actions">
+        <a href="buyer/index.html" class="btn btn-primary btn-lg">
+          Start shopping
+          <i class="ti ti-arrow-right"></i>
+        </a>
+        <a href="seller/index.html" class="btn btn-dark btn-lg">
+          Start selling
+          <i class="ti ti-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       CONTACT
+  ═══════════════════════════════════════════ -->
+  <section class="section" id="contact" style="background:var(--bg-secondary)">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Contact</div>
+        <h2>Get in touch</h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="contact-grid">
+
+        <div class="reveal-left">
+          <div class="contact-info-title">We'd love to hear from you</div>
+          <div class="contact-info-sub">
+            Have a question, suggestion, or just want to say hi?
+            Drop us a message and we'll get back to you within 24 hours.
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">✉️</div>
+            <div>
+              <div class="contact-detail-label">Email</div>
+              <div class="contact-detail-val">
+                <a href="mailto:anvaye-in@slkjijhk.com"
+                   style="color:var(--brand)">
+                  anvaye-in@slkjijhk.com
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📍</div>
+            <div>
+              <div class="contact-detail-label">Based in</div>
+              <div class="contact-detail-val">India 🇮🇳</div>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">⏰</div>
+            <div>
+              <div class="contact-detail-label">Response time</div>
+              <div class="contact-detail-val">Within 24 hours</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal-right">
+          <div class="contact-form-wrap">
+            <div class="contact-form-title">Send a message</div>
+            <form class="contact-form" id="contactForm">
+              <div class="form-row">
+                <input
+                  class="inp"
+                  type="text"
+                  name="name"
+                  placeholder="Your name"
+                  required
+                />
+                <input
+                  class="inp"
+                  type="email"
+                  name="email"
+                  placeholder="Your email"
+                  required
+                />
+              </div>
+              <input
+                class="inp"
+                type="text"
+                name="subject"
+                placeholder="Subject"
+                required
+              />
+              <textarea
+                class="inp"
+                name="message"
+                placeholder="Your message"
+                rows="5"
+                required
+                style="resize:vertical"
+              ></textarea>
+              <button type="submit" class="btn btn-primary">
+                Send message
+                <i class="ti ti-send"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <span class="nav-logo">Anvaye</span>
+          <p>One stop shop for your wish-list.
+             Connecting buyers with verified Instagram
+             sellers across India.</p>
+          <div class="footer-social">
+            <button class="social-btn" aria-label="Instagram">
+              <i class="ti ti-brand-instagram"></i>
             </button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#services" class="nav-link">Orders</a></li>
-                <li><a href="#cart" class="nav-link">Cart</a></li>
-                <li><a href="#explore" class="nav-link">Explore</a></li>
-                <li><a href="#contact" class="nav-link btn-primary">Sign In/Up</a></li>
-            </ul>
+            <button class="social-btn" aria-label="Twitter">
+              <i class="ti ti-brand-twitter"></i>
+            </button>
+            <button class="social-btn" aria-label="WhatsApp">
+              <i class="ti ti-brand-whatsapp"></i>
+            </button>
+          </div>
         </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title animate-fade-in">One stop shop for your wish-list</h1>
-                <p class="hero-subtitle animate-fade-in-delay">Anvaye is one stop shop for the wish-list you have had</p>
-                <a href="#explore" class="btn btn-large animate-fade-in-delay-2">Start Shopping</a>
-            </div>
-            <div class="hero-visual">
-                <div class="floating-card card-1"></div>
-                <div class="floating-card card-2"></div>
-                <div class="floating-card card-3"></div>
-            </div>
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="buyer/index.html">For Buyers</a></li>
+            <li><a href="seller/index.html">For Sellers</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="how-it-works.html">How it works</a></li>
+          </ul>
         </div>
-    </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="section-header">
-                <h2>About Anvaye</h2>
-                <div class="section-divider"></div>
-            </div>
-            <div class="about-content">
-                <p>Anvaye is one stop shop for the wish-list you have had. We bring together everything you've been dreaming of in one convenient e-commerce platform.</p>
-            </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Seller Guide</a></li>
+          </ul>
         </div>
-    </section>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-header">
-                <h2>What We Offer</h2>
-                <div class="section-divider"></div>
-            </div>
-            <div class="services-grid">
-                <div class="service-card animate-on-scroll">
-                    <div class="service-icon">🛍️</div>
-                    <h3>E-commerce Platform</h3>
-                    <p>Browse, shop, and fulfill your wish-list with our complete e-commerce solution</p>
-                </div>
-                <div class="service-card animate-on-scroll">
-                    <div class="service-icon">📦</div>
-                    <h3>Easy Order Management</h3>
-                    <p>Track all your orders in one place with real-time updates</p>
-                </div>
-                <div class="service-card animate-on-scroll">
-                    <div class="service-icon">🔍</div>
-                    <h3>Explore Collections</h3>
-                    <p>Discover curated collections tailored to your interests and dreams</p>
-                </div>
-            </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Refund Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
         </div>
-    </section>
 
-    <!-- Cart/Explore Section -->
-    <section class="explore" id="explore">
-        <div class="container">
-            <div class="section-header">
-                <h2>Ready to Explore?</h2>
-                <div class="section-divider"></div>
-            </div>
-            <div class="explore-content">
-                <p>Your wish-list is waiting. Start browsing our collections and make your dreams a reality.</p>
-                <a href="#contact" class="btn btn-large">Get Started Today</a>
-            </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span class="current-year"></span> Anvaye. All rights reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Sitemap</a>
         </div>
-    </section>
+      </div>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2>Get in Touch</h2>
-                <div class="section-divider"></div>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <span class="contact-icon">✉️</span>
-                        <a href="mailto:anvaye-in@slkjijhk.com">anvaye-in@slkjijhk.com</a>
-                    </div>
-                </div>
-                <form class="contact-form" id="contactForm">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <textarea placeholder="Your Message" rows="5" required></textarea>
-                    <button type="submit" class="btn btn-large">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </section>
+    </div>
+  </footer>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Anvaye. All rights reserved.</p>
-        </div>
-    </footer>
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
 
-    <script src="script.js"></script>
 </body>
 </html>
