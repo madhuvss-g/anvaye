@@ -1,0 +1,29 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor Directories
+.vscode/
+.idea/
+*.swp
+*~
+
+# Environment Variables
+.env
+.env.local
+
+# Build Outputs
+dist/
+build/
+.vercel/
+.netlify/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary Files
+*.tmp
+*.bak
+*.backup
