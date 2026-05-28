@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anvaye — Sell to Thousands of Buyers</title>
+  <meta name="description" content="List your products, reach thousands of buyers, and receive payments directly via UPI. Only 3% per sale. No monthly fees." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/seller.css" />
+
+  <style>
+    /* ── AUTH ── */
+    .auth-wrap {
+      min-height:      100vh;
+      background:      var(--bg-dark);
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      padding:         100px 24px 40px;
+      position:        relative;
+      overflow:        hidden;
+    }
+
+    .auth-wrap::before {
+      content:   '';
+      position:  absolute;
+      inset:     0;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(29,158,117,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 50%, rgba(255,92,43,0.08) 0%, transparent 60%);
+    }
+
+    .auth-card {
+      background:    var(--bg-dark-2);
+      border-radius: var(--r-xl);
+      border:        1px solid rgba(255,255,255,0.08);
+      padding:       48px 40px;
+      width:         100%;
+      max-width:     440px;
+      position:      relative;
+      z-index:       1;
+      animation:     scaleIn 0.4s var(--bounce);
+    }
+
+    .auth-logo {
+      font-size:     28px;
+      font-weight:   800;
+      color:         var(--brand);
+      margin-bottom: 8px;
+    }
+
+    .auth-title {
+      font-size:     24px;
+      font-weight:   800;
+      color:         #fff;
+      margin-bottom: 8px;
+    }
+
+    .auth-sub {
+      font-size:     15px;
+      color:         rgba(255,255,255,0.5);
+      margin-bottom: 32px;
+      line-height:   1.6;
+    }
+
+    .phone-row {
+      display: flex;
+      gap:     10px;
+    }
+
+    .phone-code {
+      width:         72px;
+      flex-shrink:   0;
+      background:    rgba(255,255,255,0.06);
+      border:        1.5px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-sm);
+      padding:       13px 12px;
+      font-size:     15px;
+      font-weight:   600;
+      color:         rgba(255,255,255,0.6);
+      text-align:    center;
+      font-family:   var(--font);
+    }
+
+    .auth-inp {
+      width:         100%;
+      border:        1.5px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-sm);
+      padding:       13px 16px;
+      font-size:     15px;
+      font-family:   var(--font);
+      background:    rgba(255,255,255,0.06);
+      color:         #fff;
+      outline:       none;
+      transition:    border-color var(--speed), box-shadow var(--speed);
+      margin-bottom: 14px;
+    }
+
+    .auth-inp:focus {
+      border-color: var(--green);
+      box-shadow:   0 0 0 4px var(--green-dim);
+    }
+
+    .auth-inp::placeholder { color: rgba(255,255,255,0.25); }
+
+    /* OTP inputs */
+    .otp-row {
+      display:         flex;
+      gap:             12px;
+      justify-content: center;
+      margin:          24px 0;
+    }
+
+    .seller-otp-input {
+      width:         64px;
+      height:        68px;
+      border:        1.5px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-sm);
+      font-size:     28px;
+      font-weight:   700;
+      text-align:    center;
+      background:    rgba(255,255,255,0.06);
+      color:         #fff;
+      outline:       none;
+      font-family:   var(--font);
+      transition:    border-color var(--speed), box-shadow var(--speed);
+    }
+
+    .seller-otp-input:focus {
+      border-color: var(--green);
+      box-shadow:   0 0 0 4px var(--green-dim);
+    }
+
+    .resend-row {
+      text-align:  center;
+      font-size:   13px;
+      color:       rgba(255,255,255,0.4);
+      margin-top:  16px;
+    }
+
+    .resend-btn {
+      background:  none;
+      border:      none;
+      color:       var(--green);
+      font-size:   13px;
+      font-weight: 600;
+      cursor:      pointer;
+      font-family: var(--font);
+      transition:  opacity var(--speed);
+    }
+
+    .resend-btn:disabled { opacity: 0.4; cursor: default; }
+
+    .auth-divider {
+      text-align:  center;
+      font-size:   13px;
+      color:       rgba(255,255,255,0.3);
+      margin:      20px 0;
+      position:    relative;
+    }
+
+    .auth-divider::before,
+    .auth-divider::after {
+      content:    '';
+      position:   absolute;
+      top:        50%;
+      width:      40%;
+      height:     1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .auth-divider::before { left:  0; }
+    .auth-divider::after  { right: 0; }
+
+    .auth-back {
+      display:     flex;
+      align-items: center;
+      gap:         6px;
+      font-size:   13px;
+      color:       rgba(255,255,255,0.4);
+      cursor:      pointer;
+      background:  none;
+      border:      none;
+      font-family: var(--font);
+      margin-top:  20px;
+      transition:  color var(--speed);
+      text-decoration: none;
+    }
+
+    .auth-back:hover { color: #fff; }
+
+    /* ── ONBOARDING ── */
+    .onboarding-wrap {
+      min-height:  100vh;
+      background:  var(--bg-dark);
+      padding-top: 80px;
+    }
+
+    .onboarding-inner {
+      max-width: 600px;
+      margin:    0 auto;
+      padding:   48px 24px 80px;
+    }
+
+    .onboarding-card {
+      background:    var(--bg-dark-2);
+      border-radius: var(--r-xl);
+      border:        1px solid rgba(255,255,255,0.08);
+      padding:       40px;
+      animation:     scaleIn 0.4s var(--bounce);
+    }
+
+    .onboarding-title {
+      font-size:     26px;
+      font-weight:   800;
+      color:         #fff;
+      margin-bottom: 8px;
+    }
+
+    .onboarding-sub {
+      font-size:     15px;
+      color:         rgba(255,255,255,0.5);
+      margin-bottom: 32px;
+      line-height:   1.6;
+    }
+
+    .form-label {
+      display:       block;
+      font-size:     13px;
+      font-weight:   600;
+      color:         rgba(255,255,255,0.7);
+      margin-bottom: 8px;
+    }
+
+    .form-hint {
+      font-size:  12px;
+      color:      rgba(255,255,255,0.3);
+      margin-top: 6px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    /* How it works steps inside onboarding */
+    .how-steps-dark {
+      display:        flex;
+      flex-direction: column;
+      gap:            0;
+      margin-top:     8px;
+    }
+
+    .how-step-dark {
+      display:     flex;
+      gap:         16px;
+      align-items: flex-start;
+      position:    relative;
+    }
+
+    .how-step-dark:not(:last-child)::after {
+      content:    '';
+      position:   absolute;
+      left:       19px;
+      top:        42px;
+      width:      2px;
+      height:     calc(100% - 14px);
+      background: linear-gradient(180deg, rgba(29,158,117,0.4), transparent);
+    }
+
+    .how-step-num {
+      width:           40px;
+      height:          40px;
+      border-radius:   50%;
+      background:      var(--green-dim);
+      color:           var(--green);
+      font-size:       15px;
+      font-weight:     800;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      flex-shrink:     0;
+      position:        relative;
+      z-index:         1;
+    }
+
+    .how-step-content {
+      padding:        8px 0 32px;
+    }
+
+    .how-step-title {
+      font-size:     15px;
+      font-weight:   600;
+      color:         #fff;
+      margin-bottom: 4px;
+    }
+
+    .how-step-desc {
+      font-size:  13px;
+      color:      rgba(255,255,255,0.45);
+      line-height: 1.6;
+    }
+
+    /* ── DASHBOARD ── */
+    .dashboard-page {
+      min-height:  100vh;
+      background:  var(--bg-tertiary);
+      padding-top: 72px;
+    }
+
+    .dashboard-topbar {
+      background:    var(--bg-dark);
+      padding:       16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      position:      sticky;
+      top:           72px;
+      z-index:       100;
+    }
+
+    .dashboard-topbar .container {
+      display:         flex;
+      align-items:     center;
+      justify-content: space-between;
+    }
+
+    .dashboard-topbar-title {
+      font-size:   16px;
+      font-weight: 700;
+      color:       #fff;
+    }
+
+    .dashboard-topbar-sub {
+      font-size:  12px;
+      color:      rgba(255,255,255,0.4);
+      margin-top: 2px;
+    }
+
+    /* Dashboard tabs */
+    .dash-tabs {
+      display:       flex;
+      gap:           0;
+      border-bottom: 1px solid var(--border-tertiary);
+      margin-bottom: 28px;
+      background:    var(--bg-primary);
+      border-radius: var(--r-lg) var(--r-lg) 0 0;
+      overflow:      hidden;
+    }
+
+    .dash-tab {
+      padding:     14px 20px;
+      font-size:   14px;
+      font-weight: 600;
+      color:       var(--text-secondary);
+      cursor:      pointer;
+      background:  none;
+      border:      none;
+      font-family: var(--font);
+      border-bottom: 2px solid transparent;
+      transition:  all var(--speed);
+      margin-bottom: -1px;
+    }
+
+    .dash-tab.active,
+    .dash-tab:hover {
+      color:        var(--brand);
+      border-color: var(--brand);
+    }
+
+    .dash-panel { display: none; }
+    .dash-panel.active { display: block; }
+
+    /* Add product form */
+    .add-product-card {
+      background:    var(--bg-primary);
+      border-radius: var(--r-lg);
+      border:        1px solid var(--border-primary);
+      padding:       28px;
+      margin-bottom: 24px;
+    }
+
+    .add-product-title {
+      font-size:     18px;
+      font-weight:   700;
+      color:         var(--text-primary);
+      margin-bottom: 20px;
+    }
+
+    .add-product-grid {
+      display:               grid;
+      grid-template-columns: 1fr 1fr;
+      gap:                   16px;
+      margin-bottom:         16px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .auth-card        { padding: 32px 24px; }
+      .onboarding-card  { padding: 28px 20px; }
+      .seller-otp-input { width: 52px; height: 56px; font-size: 22px; }
+      .add-product-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar"
+    style="background:rgba(13,13,13,0.95);backdrop-filter:blur(20px)">
+    <div class="container">
+      <a href="../index.html" class="nav-logo">Anvaye</a>
+
+      <div class="nav-links">
+        <a href="../index.html#features">Features</a>
+        <a href="../how-it-works.html">How it works</a>
+        <a href="../pricing.html">Pricing</a>
+        <a href="../faq.html">FAQ</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="../buyer/index.html" class="nav-signin">
+          Shop on Anvaye
+        </a>
+        <a href="#phone" class="btn btn-primary btn-sm"
+          style="background:var(--green);box-shadow:0 8px 32px rgba(29,158,117,0.3)">
+          Start selling
+        </a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="nav-mobile" id="navMobile">
+    <button class="nav-mobile-close" id="navMobileClose">✕</button>
+    <a href="../index.html">Home</a>
+    <a href="../how-it-works.html">How it works</a>
+    <a href="../pricing.html">Pricing</a>
+    <a href="../faq.html">FAQ</a>
+    <a href="../buyer/index.html">Shop on Anvaye</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SELLER LANDING — HERO
+  ═══════════════════════════════════════════ -->
+  <div id="landingPage">
+    <section class="seller-hero">
+      <div class="container">
+
+        <div class="seller-hero-content reveal">
+          <div class="section-tag" style="margin-bottom:20px">
+            For Sellers
+          </div>
+          <h1 style="color:#fff">
+            Turn your Instagram<br />
+            into a <span class="glow-text">real store</span>
+          </h1>
+          <p>
+            List your products, reach thousands of verified buyers,
+            and receive payments directly via UPI.
+            Only 3% per sale — no monthly fees, no hidden charges.
+          </p>
+          <div class="seller-hero-actions">
+            <button
+              class="btn btn-lg"
+              style="background:var(--green);color:#fff;box-shadow:0 8px 32px rgba(29,158,117,0.35)"
+              onclick="showPage('phonePage')"
+            >
+              Start selling free
+              <i class="ti ti-arrow-right"></i>
+            </button>
+            <a
+              href="../how-it-works.html"
+              class="btn btn-dark btn-lg"
+            >
+              How it works
+            </a>
+          </div>
+
+          <div class="seller-hero-stats">
+            <div>
+              <div class="hero-stat-val"
+                data-target="2400" data-suffix="+">0+</div>
+              <div class="hero-stat-lbl" style="color:rgba(255,255,255,0.45)">
+                Active sellers
+              </div>
+            </div>
+            <div>
+              <div class="hero-stat-val"
+                data-target="3" data-suffix="%">0%</div>
+              <div class="hero-stat-lbl" style="color:rgba(255,255,255,0.45)">
+                Per sale only
+              </div>
+            </div>
+            <div>
+              <div class="hero-stat-val"
+                data-target="18000" data-suffix="+">0+</div>
+              <div class="hero-stat-lbl" style="color:rgba(255,255,255,0.45)">
+                Buyers waiting
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard mock visual -->
+        <div class="seller-hero-visual reveal-right">
+
+          <div class="dashboard-mock">
+            <div class="dash-mock-header">
+              <div class="dash-mock-title">Seller Dashboard</div>
+              <div class="dash-mock-sub">@crochet.riya.hyd</div>
+            </div>
+
+            <div class="dash-mock-stats">
+              <div class="dash-stat-card">
+                <div class="dash-stat-lbl">Revenue</div>
+                <div class="dash-stat-val">₹18,240</div>
+                <div class="dash-stat-sub">+12% this week</div>
+              </div>
+              <div class="dash-stat-card">
+                <div class="dash-stat-lbl">Orders</div>
+                <div class="dash-stat-val">38</div>
+                <div class="dash-stat-sub">+5 today</div>
+              </div>
+              <div class="dash-stat-card">
+                <div class="dash-stat-lbl">Rating</div>
+                <div class="dash-stat-val">4.8 ★</div>
+                <div class="dash-stat-sub">142 reviews</div>
+              </div>
+              <div class="dash-stat-card">
+                <div class="dash-stat-lbl">Fee</div>
+                <div class="dash-stat-val">3%</div>
+                <div class="dash-stat-sub">per sale only</div>
+              </div>
+            </div>
+
+            <div class="dash-mock-orders-title">Recent orders</div>
+
+            <div class="dash-order-row">
+              <div class="dash-order-icon">🧶</div>
+              <div>
+                <div class="dash-order-name">Handmade Tote Bag</div>
+                <div class="dash-order-meta">#AN-10482 · Priya M.</div>
+              </div>
+              <div class="dash-pill dash-pill-ship">Shipped</div>
+            </div>
+
+            <div class="dash-order-row">
+              <div class="dash-order-icon">🧸</div>
+              <div>
+                <div class="dash-order-name">Amigurumi Teddy</div>
+                <div class="dash-order-meta">#AN-10479 · Rahul K.</div>
+              </div>
+              <div class="dash-pill dash-pill-pack">Packing</div>
+            </div>
+
+            <div class="dash-order-row">
+              <div class="dash-order-icon">👜</div>
+              <div>
+                <div class="dash-order-name">Crochet Sling Bag</div>
+                <div class="dash-order-meta">#AN-10471 · Sneha R.</div>
+              </div>
+              <div class="dash-pill dash-pill-done">Delivered</div>
+            </div>
+          </div>
+
+          <!-- Floating cards -->
+          <div class="seller-float-card sfc-1">
+            <div class="fc-val" style="color:#fff">₹18,240</div>
+            <div class="fc-lbl">This month</div>
+          </div>
+
+          <div class="seller-float-card sfc-2">
+            <div class="fc-val" style="color:var(--green)">+23%</div>
+            <div class="fc-lbl">Growth</div>
+          </div>
+
+          <div class="seller-float-card sfc-3">
+            <div class="fc-val" style="color:#fff">4.8 ★</div>
+            <div class="fc-lbl">Avg rating</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Why sell on Anvaye</div>
+          <h2>Everything a seller needs</h2>
+          <div class="divider"></div>
+        </div>
+
+        <div class="seller-features-grid">
+
+          <div class="seller-feature-card reveal">
+            <div class="sf-icon sf-icon-orange">💸</div>
+            <div class="sf-title">Direct UPI Payments</div>
+            <div class="sf-desc">
+              Buyers pay directly to your UPI ID.
+              No holding periods, no delays. Money in your account instantly.
+            </div>
+          </div>
+
+          <div class="seller-feature-card reveal delay-1">
+            <div class="sf-icon sf-icon-green">📊</div>
+            <div class="sf-title">Only 3% Per Sale</div>
+            <div class="sf-desc">
+              No monthly fees. No listing fees. We only earn when you earn.
+              The lowest commission in the market.
+            </div>
+          </div>
+
+          <div class="seller-feature-card reveal delay-2">
+            <div class="sf-icon sf-icon-amber">⭐</div>
+            <div class="sf-title">Verified Reviews</div>
+            <div class="sf-desc">
+              Only real buyers can leave reviews.
+              Build genuine trust that converts new customers.
+            </div>
+          </div>
+
+          <div class="seller-feature-card reveal delay-1">
+            <div class="sf-icon sf-icon-blue">📱</div>
+            <div class="sf-title">Instagram Integration</div>
+            <div class="sf-desc">
+              Your existing Instagram followers find your Anvaye store directly.
+              No need to rebuild your audience from scratch.
+            </div>
+          </div>
+
+          <div class="seller-feature-card reveal delay-2">
+            <div class="sf-icon sf-icon-purple">📦</div>
+            <div class="sf-title">Order Management</div>
+            <div class="sf-desc">
+              Manage all your orders in one dashboard.
+              Update status, track deliveries, and keep buyers informed.
+            </div>
+          </div>
+
+          <div class="seller-feature-card reveal delay-3">
+            <div class="sf-icon sf-icon-orange">🚀</div>
+            <div class="sf-title">Go Live in Minutes</div>
+            <div class="sf-desc">
+              Set up your store in under 5 minutes.
+              Add products, connect Instagram, and start receiving orders today.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Onboarding steps -->
+    <section class="section" style="background:var(--bg-secondary)">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">Getting started</div>
+          <h2>Live in 4 simple steps</h2>
+          <div class="divider"></div>
+        </div>
+
+        <div class="onboard-steps">
+
+          <div class="onboard-step reveal">
+            <div class="onboard-num">1</div>
+            <div class="onboard-title">Connect Instagram</div>
+            <div class="onboard-desc">
+              Your Instagram handle becomes your store identity.
+              Buyers find you by your username.
+            </div>
+          </div>
+
+          <div class="onboard-step reveal delay-1">
+            <div class="onboard-num">2</div>
+            <div class="onboard-title">List products</div>
+            <div class="onboard-desc">
+              Add products with photos, prices, and descriptions.
+              Takes less than 2 minutes per product.
+            </div>
+          </div>
+
+          <div class="onboard-step reveal delay-2">
+            <div class="onboard-num">3</div>
+            <div class="onboard-title">Receive orders</div>
+            <div class="onboard-desc">
+              Buyers pay directly to you via UPI.
+              Get notified instantly for every new order.
+            </div>
+          </div>
+
+          <div class="onboard-step reveal delay-3">
+            <div class="onboard-num">4</div>
+            <div class="onboard-title">Build reputation</div>
+            <div class="onboard-desc">
+              Grow your rating with tamper-proof verified reviews
+              from real buyers only.
+            </div>
+          </div>
+
+        </div>
+
+        <div style="text-align:center;margin-top:48px">
+          <button
+            class="btn btn-lg"
+            style="background:var(--green);color:#fff;
+                   box-shadow:0 8px 32px rgba(29,158,117,0.35)"
+            onclick="showPage('phonePage')"
+          >
+            Start selling free
+            <i class="ti ti-arrow-right"></i>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>Ready to grow<br />your business?</h2>
+        <p>Join 2,400+ sellers already earning on Anvaye</p>
+        <div class="cta-actions">
+          <button
+            class="btn btn-primary btn-lg"
+            onclick="showPage('phonePage')"
+          >
+            Start selling free
+            <i class="ti ti-arrow-right"></i>
+          </button>
+          <a href="../buyer/index.html" class="btn btn-dark btn-lg">
+            Shop as buyer
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+
+          <div class="footer-brand">
+            <span class="nav-logo">Anvaye</span>
+            <p>One stop shop for your wish-list.
+               Connecting buyers with verified Instagram
+               sellers across India.</p>
+            <div class="footer-social">
+              <button class="social-btn" aria-label="Instagram">
+                <i class="ti ti-brand-instagram"></i>
+              </button>
+              <button class="social-btn" aria-label="Twitter">
+                <i class="ti ti-brand-twitter"></i>
+              </button>
+              <button class="social-btn" aria-label="WhatsApp">
+                <i class="ti ti-brand-whatsapp"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4>Platform</h4>
+            <ul>
+              <li><a href="../buyer/index.html">For Buyers</a></li>
+              <li><a href="../seller/index.html">For Sellers</a></li>
+              <li><a href="../pricing.html">Pricing</a></li>
+              <li><a href="../how-it-works.html">How it works</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="../faq.html">FAQ</a></li>
+              <li><a href="../index.html#contact">Contact</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Seller Guide</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Refund Policy</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="footer-bottom">
+          <span>© <span class="current-year"></span> Anvaye. All rights reserved.</span>
+          <div class="footer-bottom-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Sitemap</a>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+  <!-- end landingPage -->
+
+  <!-- ═══════════════════════════════════════════
+       PHONE ENTRY
+  ═══════════════════════════════════════════ -->
+  <div class="auth-wrap" id="phonePage" style="display:none">
+    <div class="auth-card">
+
+      <div class="auth-logo">Anvaye</div>
+      <div class="auth-title">Start selling 🏪</div>
+      <div class="auth-sub">
+        Enter your mobile number to create your store.
+        We'll send you a one-time verification code.
+      </div>
+
+      <form id="sellerPhoneForm">
+        <div class="phone-row" style="margin-bottom:16px">
+          <div class="phone-code">+91</div>
+          <input
+            class="auth-inp"
+            style="margin-bottom:0"
+            type="tel"
+            id="sellerPhoneInput"
+            inputmode="numeric"
+            placeholder="98765 43210"
+            maxlength="10"
+            required
+            aria-label="Mobile number"
+          />
+        </div>
+        <button
+          type="submit"
+          class="btn"
+          style="width:100%;background:var(--green);color:#fff;
+                 box-shadow:0 8px 32px rgba(29,158,117,0.3)"
+        >
+          Send OTP
+          <i class="ti ti-arrow-right"></i>
+        </button>
+      </form>
+
+      <div class="auth-divider">or</div>
+
+      <div style="text-align:center;font-size:13px;color:rgba(255,255,255,0.4)">
+        By continuing you agree to our
+        <a href="#" style="color:var(--green)">Terms</a> &
+        <a href="#" style="color:var(--green)">Privacy Policy</a>
+      </div>
+
+      <button class="auth-back" onclick="showPage('landingPage')">
+        <i class="ti ti-arrow-left"></i>
+        Back
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       OTP VERIFICATION
+  ═══════════════════════════════════════════ -->
+  <div class="auth-wrap" id="otpPage" style="display:none">
+    <div class="auth-card">
+
+      <div class="auth-logo">Anvaye</div>
+      <div class="auth-title">Verify OTP 🔐</div>
+      <div class="auth-sub" id="sellerOtpSubText">
+        Sent to +91 XXXXXXXXXX
+      </div>
+
+      <form id="sellerOtpForm">
+        <div class="otp-row" role="group" aria-label="OTP input">
+          <input class="seller-otp-input" maxlength="1"
+            inputmode="numeric" autocomplete="one-time-code"
+            aria-label="Digit 1" />
+          <input class="seller-otp-input" maxlength="1"
+            inputmode="numeric" aria-label="Digit 2" />
+          <input class="seller-otp-input" maxlength="1"
+            inputmode="numeric" aria-label="Digit 3" />
+          <input class="seller-otp-input" maxlength="1"
+            inputmode="numeric" aria-label="Digit 4" />
+        </div>
+
+        <button
+          type="submit"
+          class="btn"
+          style="width:100%;background:var(--green);color:#fff;
+                 box-shadow:0 8px 32px rgba(29,158,117,0.3)"
+        >
+          Verify & Continue
+          <i class="ti ti-arrow-right"></i>
+        </button>
+      </form>
+
+      <div class="resend-row" style="margin-top:16px">
+        <button
+          class="resend-btn"
+          id="sellerResendBtn"
+          disabled
+        >Resend OTP</button>
+        <span id="sellerResendTimer"> in 30s</span>
+      </div>
+
+      <button
+        class="auth-back"
+        onclick="showPage('phonePage')"
+      >
+        <i class="ti ti-arrow-left"></i>
+        Change number
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       ONBOARDING — STORE SETUP
+  ═══════════════════════════════════════════ -->
+  <div id="onboardingPage" style="display:none">
+    <div class="onboarding-wrap">
+      <div class="onboarding-inner">
+
+        <button
+          class="auth-back"
+          style="margin-bottom:24px"
+          onclick="showPage('otpPage')"
+        >
+          <i class="ti ti-arrow-left"></i>
+          Back
+        </button>
+
+        <div class="onboarding-card">
+
+          <div class="onboarding-title">Set up your store 🏪</div>
+          <div class="onboarding-sub">
+            Connect your Instagram and tell buyers what you sell.
+            Takes less than 2 minutes.
+          </div>
+
+          <form id="onboardingForm">
+
+            <div class="form-group">
+              <label class="form-label" for="igHandle">
+                Instagram handle
+              </label>
+              <input
+                class="auth-inp"
+                type="text"
+                id="igHandle"
+                placeholder="@yourusername"
+                required
+                aria-label="Instagram handle"
+              />
+              <div class="form-hint">
+                This becomes your store identity on Anvaye
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="storeName">
+                Store display name
+              </label>
+              <input
+                class="auth-inp"
+                type="text"
+                id="storeName"
+                placeholder="e.g. Crochet by Riya"
+                required
+                aria-label="Store name"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="storeDesc">
+                What do you sell?
+              </label>
+              <input
+                class="auth-inp"
+                type="text"
+                id="storeDesc"
+                placeholder="e.g. Handmade crochet bags and accessories"
+                required
+                aria-label="Store description"
+              />
+            </div>
+
+            <button
+              type="submit"
+              class="btn"
+              style="width:100%;background:var(--green);color:#fff;
+                     box-shadow:0 8px 32px rgba(29,158,117,0.3)"
+            >
+              Create my store
+              <i class="ti ti-arrow-right"></i>
+            </button>
+
+          </form>
+
+        </div>
+
+        <!-- How it works -->
+        <div class="onboarding-card" style="margin-top:24px">
+          <div class="onboarding-title" style="font-size:20px;margin-bottom:24px">
+            How Anvaye works for sellers
+          </div>
+
+          <div class="how-steps-dark">
+
+            <div class="how-step-dark">
+              <div class="how-step-num">1</div>
+              <div class="how-step-content">
+                <div class="how-step-title">Connect your Instagram</div>
+                <div class="how-step-desc">
+                  Your existing followers find your Anvaye store directly.
+                  No need to rebuild an audience.
+                </div>
+              </div>
+            </div>
+
+            <div class="how-step-dark">
+              <div class="how-step-num">2</div>
+              <div class="how-step-content">
+                <div class="how-step-title">List your products</div>
+                <div class="how-step-desc">
+                  Add products with photos, prices, and descriptions.
+                  Takes less than 2 minutes per product.
+                </div>
+              </div>
+            </div>
+
+            <div class="how-step-dark">
+              <div class="how-step-num">3</div>
+              <div class="how-step-content">
+                <div class="how-step-title">Receive orders & payments</div>
+                <div class="how-step-desc">
+                  Buyers pay directly to you via UPI.
+                  Only 3% per successful sale — no monthly fees.
+                </div>
+              </div>
+            </div>
+            <div class="how-step-dark">
+              <div class="how-step-num">4</div>
+              <div class="how-step-content">
+                <div class="how-step-title">Build your reputation</div>
+                <div class="how-step-desc">
+                  Grow your rating with tamper-proof verified reviews
+                  from real buyers only.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- end onboardingPage -->
+
+  <!-- ═══════════════════════════════════════════
+       SELLER DASHBOARD
+  ═══════════════════════════════════════════ -->
+  <div id="dashboardPage" style="display:none">
+    <div class="dashboard-page">
+
+      <!-- Dashboard topbar -->
+      <div class="dashboard-topbar">
+        <div class="container">
+          <div>
+            <div class="dashboard-topbar-title">Seller Dashboard</div>
+            <div class="dashboard-topbar-sub">@crochet.riya.hyd</div>
+          </div>
+          <button
+            class="btn btn-sm"
+            style="background:var(--green);color:#fff"
+            onclick="showPage('onboardingPage')"
+          >
+            + Add product
+          </button>
+        </div>
+      </div>
+
+      <div class="container" style="padding-top:32px;padding-bottom:80px">
+
+        <!-- Stats grid -->
+        <div class="dashboard-stats" style="margin-bottom:28px">
+
+          <div class="dash-stat">
+            <div class="dash-stat-label">Total revenue</div>
+            <div class="dash-stat-value"
+              data-target="18240"
+              data-prefix="₹">₹0</div>
+            <div class="dash-stat-change">+12% this week</div>
+          </div>
+
+          <div class="dash-stat">
+            <div class="dash-stat-label">Total orders</div>
+            <div class="dash-stat-value"
+              data-target="38">0</div>
+            <div class="dash-stat-change">+5 today</div>
+          </div>
+
+          <div class="dash-stat">
+            <div class="dash-stat-label">Avg rating</div>
+            <div class="dash-stat-value">4.8 ★</div>
+            <div class="dash-stat-change">142 reviews</div>
+          </div>
+
+          <div class="dash-stat">
+            <div class="dash-stat-label">Platform fee</div>
+            <div class="dash-stat-value">3%</div>
+            <div class="dash-stat-change">per sale only</div>
+          </div>
+
+        </div>
+
+        <!-- Tabs -->
+        <div class="dash-tabs">
+          <button
+            class="dash-tab active"
+            data-tab="orders"
+          >Orders</button>
+          <button
+            class="dash-tab"
+            data-tab="products"
+          >Products</button>
+          <button
+            class="dash-tab"
+            data-tab="add"
+          >+ Add Product</button>
+        </div>
+
+        <!-- Orders panel -->
+        <div class="dash-panel active" data-panel="orders">
+          <div class="orders-table-wrap">
+
+            <div class="orders-table-header">
+              <div class="orders-table-title">Recent orders</div>
+              <span class="badge badge-green">38 total</span>
+            </div>
+
+            <div class="order-row">
+              <div class="order-item-icon">🧶</div>
+              <div>
+                <div class="order-item-name">Handmade Tote Bag</div>
+                <div class="order-item-meta">#AN-10482 · Priya M. · Today 10:42 AM</div>
+              </div>
+              <div class="order-item-price">₹549</div>
+              <div
+                class="order-pill op-ship"
+                data-order-pill="10482"
+              >Shipped</div>
+            </div>
+
+            <div class="order-row">
+              <div class="order-item-icon">🧸</div>
+              <div>
+                <div class="order-item-name">Amigurumi Teddy</div>
+                <div class="order-item-meta">#AN-10479 · Rahul K. · Yesterday 3:15 PM</div>
+              </div>
+              <div class="order-item-price">₹799</div>
+              <div
+                class="order-pill op-pack"
+                data-order-pill="10479"
+              >Packing</div>
+            </div>
+
+            <div class="order-row">
+              <div class="order-item-icon">👜</div>
+              <div>
+                <div class="order-item-name">Crochet Sling Bag</div>
+                <div class="order-item-meta">#AN-10471 · Sneha R. · 2 days ago</div>
+              </div>
+              <div class="order-item-price">₹649</div>
+              <div
+                class="order-pill op-done"
+                data-order-pill="10471"
+              >Delivered</div>
+            </div>
+
+            <div class="order-row">
+              <div class="order-item-icon">🌸</div>
+              <div>
+                <div class="order-item-name">Floral Wall Art</div>
+                <div class="order-item-meta">#AN-10468 · Meera P. · 3 days ago</div>
+              </div>
+              <div class="order-item-price">₹399</div>
+              <div
+                class="order-pill op-done"
+                data-order-pill="10468"
+              >Delivered</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Products panel -->
+        <div class="dash-panel" data-panel="products">
+          <div
+            class="products-grid"
+            id="productsGrid"
+            style="margin-top:4px"
+          >
+            <!-- Rendered by seller.js renderProducts() -->
+
+            <!-- Placeholder products -->
+            <div class="product-card">
+              <div class="product-img">🧶</div>
+              <div class="product-info">
+                <div class="product-name">Handmade Tote Bag</div>
+                <div class="product-price">₹549</div>
+                <div class="product-rating">★ 4.8 · 32 reviews</div>
+                <div style="display:flex;gap:8px;margin-top:10px">
+                  <button class="btn btn-secondary btn-sm"
+                    style="flex:1">Edit</button>
+                  <button class="btn btn-sm"
+                    style="flex:1;background:var(--red-dim);
+                           color:var(--red-av);border:none">
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-img">🌸</div>
+              <div class="product-info">
+                <div class="product-name">Floral Wall Art</div>
+                <div class="product-price">₹399</div>
+                <div class="product-rating">★ 4.6 · 19 reviews</div>
+                <div style="display:flex;gap:8px;margin-top:10px">
+                  <button class="btn btn-secondary btn-sm"
+                    style="flex:1">Edit</button>
+                  <button class="btn btn-sm"
+                    style="flex:1;background:var(--red-dim);
+                           color:var(--red-av);border:none">
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-img">🧸</div>
+              <div class="product-info">
+                <div class="product-name">Amigurumi Teddy</div>
+                <div class="product-price">₹799</div>
+                <div class="product-rating">★ 4.9 · 41 reviews</div>
+                <div style="display:flex;gap:8px;margin-top:10px">
+                  <button class="btn btn-secondary btn-sm"
+                    style="flex:1">Edit</button>
+                  <button class="btn btn-sm"
+                    style="flex:1;background:var(--red-dim);
+                           color:var(--red-av);border:none">
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Add product panel -->
+        <div class="dash-panel" data-panel="add">
+          <div class="add-product-card">
+            <div class="add-product-title">Add new product</div>
+
+            <form id="addProductForm">
+              <div class="add-product-grid">
+                <div class="form-group" style="margin-bottom:0">
+                  <label class="form-label"
+                    style="color:var(--text-primary)"
+                    for="productName">
+                    Product name
+                  </label>
+                  <input
+                    class="inp"
+                    type="text"
+                    id="productName"
+                    placeholder="e.g. Handmade Tote Bag"
+                    required
+                  />
+                </div>
+                <div class="form-group" style="margin-bottom:0">
+                  <label class="form-label"
+                    style="color:var(--text-primary)"
+                    for="productPrice">
+                    Price (₹)
+                  </label>
+                  <input
+                    class="inp"
+                    type="number"
+                    id="productPrice"
+                    placeholder="e.g. 549"
+                    required
+                    min="1"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-top:16px">
+                <label class="form-label"
+                  style="color:var(--text-primary)"
+                  for="productDesc">
+                  Description
+                </label>
+                <textarea
+                  class="inp"
+                  id="productDesc"
+                  placeholder="Describe your product..."
+                  rows="3"
+                  required
+                  style="resize:vertical"
+                ></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label"
+                  style="color:var(--text-primary)"
+                  for="productEmoji">
+                  Product emoji (optional)
+                </label>
+                <input
+                  class="inp"
+                  type="text"
+                  id="productEmoji"
+                  placeholder="e.g. 🧶"
+                  maxlength="2"
+                />
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-primary"
+              >
+                Add product
+                <i class="ti ti-plus"></i>
+              </button>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- end dashboardPage -->
+
+  <!-- Scripts -->
+  <script src="../js/main.js"></script>
+  <script src="../js/seller.js"></script>
+  <script>
+    /* ── PAGE SWITCHER ── */
+    const sellerPages = [
+      'landingPage',
+      'phonePage',
+      'otpPage',
+      'onboardingPage',
+      'dashboardPage'
+    ];
+
+    function showPage(pageId) {
+      sellerPages.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
+
+      const target = document.getElementById(pageId);
+      if (target) {
+        target.style.display   = 'block';
+        target.style.opacity   = '0';
+        target.style.transform = 'translateY(12px)';
+        target.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        requestAnimationFrame(() => {
+          target.style.opacity   = '1';
+          target.style.transform = 'translateY(0)';
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    /* ── OVERRIDE PHONE FORM ── */
+    document.getElementById('sellerPhoneForm')
+      ?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const phone = document.getElementById('sellerPhoneInput')?.value.trim();
+        const phoneRegex = /^[6-9]\d{9}$/;
+        if (!phoneRegex.test(phone)) return;
+
+        document.getElementById('sellerOtpSubText').textContent =
+          'Sent to +91 ' + phone;
+
+        showToast('OTP sent to +91 ' + phone);
+        showPage('otpPage');
+      });
+
+    /* ── OVERRIDE OTP FORM ── */
+    document.getElementById('sellerOtpForm')
+      ?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const inputs = document.querySelectorAll('.seller-otp-input');
+        const otp    = [...inputs].map(i => i.value).join('');
+        if (otp.length < 4) return;
+
+        const store = localStorage.getItem('anvaye_store');
+        if (store) {
+          showPage('dashboardPage');
+        } else {
+          showPage('onboardingPage');
+        }
+      });
+
+    /* ── OVERRIDE ONBOARDING FORM ── */
+    document.getElementById('onboardingForm')
+      ?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const handle = document.getElementById('igHandle')?.value.trim();
+        const name   = document.getElementById('storeName')?.value.trim();
+        const desc   = document.getElementById('storeDesc')?.value.trim();
+
+        if (!handle || !name || !desc) return;
+        if (!handle.startsWith('@')) {
+          showToast('Instagram handle must start with @', 'error');
+          return;
+        }
+
+        localStorage.setItem('anvaye_store', JSON.stringify({
+          handle, name, desc,
+          createdAt: new Date().toISOString()
+        }));
+
+        showToast('🎉 Your store is live!');
+        setTimeout(() => showPage('dashboardPage'), 1000);
+      });
+
+    /* ── DASHBOARD TABS ── */
+    document.querySelectorAll('.dash-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.getAttribute('data-tab');
+
+        document.querySelectorAll('.dash-tab')
+          .forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        document.querySelectorAll('.dash-panel').forEach(panel => {
+          panel.classList.remove('active');
+          if (panel.getAttribute('data-panel') === target) {
+            panel.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
