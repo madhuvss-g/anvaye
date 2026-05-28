@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anvaye Pricing — Simple & Transparent</title>
+  <meta name="description" content="Simple transparent pricing for buyers and sellers. Anvaye Pass for ₹50 / 15 days. Only 3% per sale for sellers. No hidden fees." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="css/main.css" />
+
+  <style>
+    /* ── HERO ── */
+    .pricing-hero {
+      background:  var(--bg-dark);
+      padding:     140px 0 80px;
+      text-align:  center;
+      position:    relative;
+      overflow:    hidden;
+    }
+
+    .pricing-hero::before {
+      content:   '';
+      position:  absolute;
+      inset:     0;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(255,92,43,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 50%, rgba(29,158,117,0.10) 0%, transparent 60%);
+    }
+
+    .pricing-hero::after {
+      content:    '';
+      position:   absolute;
+      inset:      0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events:  none;
+    }
+
+    .pricing-hero-inner {
+      position: relative;
+      z-index:  1;
+    }
+
+    .pricing-hero h1 { color: #fff; margin-bottom: 16px; }
+    .pricing-hero p  {
+      color:     rgba(255,255,255,0.55);
+      font-size: 20px;
+      max-width: 520px;
+      margin:    0 auto;
+    }
+
+    /* ── PRICING CARDS ── */
+    .pricing-section {
+      padding: 100px 0;
+    }
+
+    .pricing-grid {
+      display:               grid;
+      grid-template-columns: 1fr 1fr;
+      gap:                   32px;
+      max-width:             900px;
+      margin:                0 auto;
+    }
+
+    .pricing-card {
+      background:    var(--bg-primary);
+      border-radius: var(--r-xl);
+      border:        1px solid var(--border-primary);
+      padding:       40px;
+      position:      relative;
+      overflow:      hidden;
+      transition:    all var(--speed) var(--ease);
+    }
+
+    .pricing-card:hover {
+      transform:  translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .pricing-card::before {
+      content:    '';
+      position:   absolute;
+      top:        0;
+      left:       0;
+      right:      0;
+      height:     4px;
+    }
+
+    .pricing-card-buyer::before {
+      background: linear-gradient(90deg, var(--brand), var(--amber));
+    }
+
+    .pricing-card-seller::before {
+      background: linear-gradient(90deg, var(--green), var(--brand));
+    }
+
+    .pricing-card-tag {
+      display:       inline-flex;
+      align-items:   center;
+      gap:           6px;
+      font-size:     12px;
+      font-weight:   700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding:       4px 12px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .tag-buyer  { background: var(--brand-dim);  color: var(--brand); }
+    .tag-seller { background: var(--green-dim);  color: var(--green); }
+
+    .pricing-card-title {
+      font-size:     24px;
+      font-weight:   800;
+      color:         var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .pricing-card-sub {
+      font-size:     15px;
+      color:         var(--text-secondary);
+      margin-bottom: 28px;
+      line-height:   1.6;
+    }
+
+    .pricing-amount-wrap {
+      display:       flex;
+      align-items:   flex-end;
+      gap:           4px;
+      margin-bottom: 8px;
+    }
+
+    .pricing-currency {
+      font-size:     24px;
+      font-weight:   700;
+      color:         var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .pricing-amount {
+      font-size:   56px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .pricing-amount-buyer  { color: var(--brand); }
+    .pricing-amount-seller { color: var(--green); }
+
+    .pricing-period {
+      font-size:     15px;
+      color:         var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    .pricing-features {
+      display:        flex;
+      flex-direction: column;
+      gap:            12px;
+      margin-bottom:  32px;
+    }
+
+    .pricing-feature {
+      display:     flex;
+      gap:         10px;
+      align-items: flex-start;
+      font-size:   14px;
+      color:       var(--text-primary);
+      line-height: 1.5;
+    }
+
+    .pf-chk {
+      font-size:   16px;
+      flex-shrink: 0;
+      margin-top:  1px;
+    }
+
+    .pf-chk-buyer  { color: var(--brand); }
+    .pf-chk-seller { color: var(--green); }
+
+    /* Free tier */
+    .free-tier {
+      background:    var(--bg-secondary);
+      border-radius: var(--r-md);
+      padding:       16px;
+      margin-bottom: 20px;
+      border:        1px solid var(--border-secondary);
+    }
+
+    .free-tier-title {
+      font-size:     13px;
+      font-weight:   700;
+      color:         var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .free-tier-item {
+      display:     flex;
+      gap:         8px;
+      font-size:   13px;
+      color:       var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    /* ── COMPARISON ── */
+    .compare-section {
+      background: var(--bg-secondary);
+      padding:    80px 0;
+    }
+
+    .compare-table {
+      width:           100%;
+      border-collapse: separate;
+      border-spacing:  0;
+      margin-top:      48px;
+      border-radius:   var(--r-lg);
+      overflow:        hidden;
+      border:          1px solid var(--border-primary);
+    }
+
+    .compare-table th {
+      padding:    18px 20px;
+      font-size:  13px;
+      font-weight: 700;
+      text-align: left;
+      background: var(--bg-tertiary);
+      color:      var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .compare-table th:nth-child(2) { color: var(--brand); text-align: center; }
+    .compare-table th:nth-child(3) { color: var(--green); text-align: center; }
+
+    .compare-table td {
+      padding:    14px 20px;
+      font-size:  14px;
+      border-top: 1px solid var(--border-tertiary);
+      background: var(--bg-primary);
+      color:      var(--text-primary);
+    }
+
+    .compare-table td:nth-child(2),
+    .compare-table td:nth-child(3) {
+      text-align:  center;
+      font-weight: 600;
+    }
+
+    .c-yes { color: var(--green); font-size: 18px; }
+    .c-no  { color: var(--border-secondary); font-size: 18px; }
+
+    /* ── FAQ ── */
+    .pricing-faq {
+      padding: 80px 0;
+    }
+
+    .accordion {
+      max-width:  700px;
+      margin:     48px auto 0;
+    }
+
+    .accordion-item {
+      border:        1px solid var(--border-primary);
+      border-radius: var(--r-md);
+      margin-bottom: 12px;
+      overflow:      hidden;
+      transition:    box-shadow var(--speed);
+    }
+
+    .accordion-item:hover {
+      box-shadow: var(--shadow-sm);
+    }
+
+    .accordion-btn {
+      width:           100%;
+      padding:         18px 20px;
+      display:         flex;
+      justify-content: space-between;
+      align-items:     center;
+      background:      var(--bg-primary);
+      border:          none;
+      cursor:          pointer;
+      font-family:     var(--font);
+      font-size:       15px;
+      font-weight:     600;
+      color:           var(--text-primary);
+      text-align:      left;
+      transition:      background var(--speed);
+    }
+
+    .accordion-btn:hover { background: var(--bg-secondary); }
+
+    .accordion-btn.open { color: var(--brand); }
+
+    .accordion-icon {
+      font-size:   20px;
+      color:       var(--text-secondary);
+      transition:  transform var(--speed);
+      flex-shrink: 0;
+    }
+
+    .accordion-btn.open .accordion-icon {
+      transform: rotate(45deg);
+      color:     var(--brand);
+    }
+
+    .accordion-body {
+      display:    none;
+      padding:    0 20px 18px;
+      font-size:  14px;
+      color:      var(--text-secondary);
+      line-height: 1.7;
+      background: var(--bg-primary);
+    }
+
+    .accordion-body.open { display: block; }
+
+    /* ── CTA ── */
+    .pricing-cta {
+      background:  var(--bg-dark);
+      padding:     100px 0;
+      text-align:  center;
+      position:    relative;
+      overflow:    hidden;
+    }
+
+    .pricing-cta::before {
+      content:   '';
+      position:  absolute;
+      inset:     0;
+      background: radial-gradient(
+        ellipse at 50% 50%,
+        rgba(255,92,43,0.15) 0%,
+        transparent 70%
+      );
+    }
+
+    .pricing-cta h2 { color: #fff; position: relative; z-index: 1; }
+    .pricing-cta p  {
+      color:     rgba(255,255,255,0.55);
+      font-size: 18px;
+      margin:    16px auto 40px;
+      max-width: 480px;
+      position:  relative;
+      z-index:   1;
+    }
+
+    .pricing-cta-actions {
+      display:         flex;
+      gap:             16px;
+      justify-content: center;
+      flex-wrap:       wrap;
+      position:        relative;
+      z-index:         1;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .pricing-grid { grid-template-columns: 1fr; max-width: 480px; }
+    }
+
+    @media (max-width: 480px) {
+      .pricing-card        { padding: 28px 24px; }
+      .pricing-cta-actions { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo">Anvaye</a>
+      <div class="nav-links">
+        <a href="index.html#features">Features</a>
+        <a href="how-it-works.html">How it works</a>
+        <a href="pricing.html" style="color:var(--brand)">Pricing</a>
+        <a href="faq.html">FAQ</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a href="buyer/index.html" class="nav-signin">Sign in</a>
+        <a href="index.html#join" class="btn btn-primary btn-sm">Get started</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="nav-mobile" id="navMobile">
+    <button class="nav-mobile-close" id="navMobileClose">✕</button>
+    <a href="index.html">Home</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="faq.html">FAQ</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="index.html#join" class="btn btn-primary">Get started</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="pricing-hero">
+    <div class="container">
+      <div class="pricing-hero-inner">
+        <div class="section-tag" style="margin-bottom:16px">Pricing</div>
+        <h1>Simple &<br /><span class="glow-text">transparent</span></h1>
+        <p>No hidden fees. No surprises.
+           Pay only for what you use.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING CARDS -->
+  <section class="pricing-section">
+    <div class="container">
+      <div class="pricing-grid">
+
+        <!-- Buyer card -->
+        <div class="pricing-card pricing-card-buyer reveal">
+          <div class="pricing-card-tag tag-buyer">
+            🛍️ For Buyers
+          </div>
+          <div class="pricing-card-title">Anvaye Pass</div>
+          <div class="pricing-card-sub">
+            Unlock all sellers and shop without limits.
+            One flat fee — no per-order charges.
+          </div>
+
+          <!-- Free tier -->
+          <div class="free-tier">
+            <div class="free-tier-title">Free forever</div>
+            <div class="free-tier-item">
+              <span style="color:var(--green)">✓</span>
+              Browse all verified sellers
+            </div>
+            <div class="free-tier-item">
+              <span style="color:var(--green)">✓</span>
+              Order from free sellers
+            </div>
+            <div class="free-tier-item">
+              <span style="color:var(--green)">✓</span>
+              Basic order tracking
+            </div>
+          </div>
+
+          <div class="pricing-amount-wrap">
+            <div class="pricing-currency">₹</div>
+            <div class="pricing-amount pricing-amount-buyer">50</div>
+          </div>
+          <div class="pricing-period">per 15 days · Anvaye Pass</div>
+
+          <div class="pricing-features">
+            <div class="pricing-feature">
+              <span class="pf-chk pf-chk-buyer">✓</span>
+              Order from any seller on Anvaye
+            </div>
+            <div class="pricing-feature">
+              <span class="pf-chk pf-chk-buyer">✓</span>
+              No per-order platform fee
+            </div>
+            <div class="pricing-feature">
+              <span class="pf-chk pf-chk-buyer">✓</span>
+              Unlimited orders for 15 days
+            </div>
+            <div class="pricing-feature">
+              <span class="pf-chk pf-chk-buyer">✓</span>
+              Leave verified reviews after purchase
+            </div>
+            <div class="pricing-feature">
+              <span class="pf-chk pf-chk-buyer">✓</span>
+              Real-time order tracking
+            </div>
+            <div class="pricing-feature">
+              <span class="pf-chk pf-chk-buyer">✓</span>
+              Priority customer support
+            </div>
+          </div>
+
+          <a href="buyer/index.html" class="btn btn-primary" style="width:100%">
+            Get Anvaye Pass
+            <i class="ti ti-arrow-right"></i>
+          </a>
+
+          <div style="text-align:center;font-size:12px;
+                      color:var(--text-secondary);margin-top:12px">
+            Secured by Razorpay · Cancel anytime
+          </div>
+        </div>
+
+        <!-- Seller card -->
+        <div class="pricing-card pricing-card-seller reveal delay-2">
+          <div class="pricing-card-tag tag-seller">
+            🏪 For Sellers
+          </div>
+          <div class="pricing-card-title">Sell on Anvaye</div>
+          <div class="pricing-card-sub">
+            No upfront cost. No monthly fees.
+            We only earn when you earn.
+          </div>
+
+          <!-- Free tier -->
+          <div class="free-tier">
+            <div class="free-tier-title">Always free to list</div>
+            <div class="free-tier-item">
+              <span style="color:var(--green)">✓</span>
+              Unlimited product listings
+            </div>
+            <div class="free-tier-item">
+              <span style="color:var(--green)">✓</span>
+              Full seller dashboard
+            </div>
+            <div class="free-tier-item">
+              <span style="color:var(--green)">✓</span>
+              Instagram store integration
+            </div>
+          </div>
+
+          <div class="pricing-amount-wrap">
+            <div class="pricing-amount pricing-amount-seller">3</div>
+            <div class="pricing-currency" style="margin-bottom:8px">%</div>
+          </div>
+          <div class="pricing-period">per successful sale only</div>
+
+          <div class="pricing-features">
+            <div class="pricing-feature">
+              <span class="pf-chk pf-chk-seller">✓</span>
+              Direct UPI payments to your account
+            </div>
+            <div class="pricing-feature">
+              <span class="pf-chk pf-chk-seller">✓</span>
+              No monthly or listing fees ever
+            </div>
+            <div class="pricing-feature">
+              <span class="pf-chk pf-chk-seller">✓</span>
+              Full order management dashboard
+            </div>
+            <div class="pricing-feature">
+              <span class="pf-chk pf-chk-seller">✓</span>
+              Verified buyer reviews system
+            </div>
+            <div class="pricing-feature">
+              <span class="pf-chk pf-chk-seller">✓</span>
+              Revenue & analytics dashboard
+            </div>
+            <div class="pricing-feature">
+              <span class="pf-chk pf-chk-seller">✓</span>
+              Reach 18,000+ active buyers
+            </div>
+          </div>
+
+          <a
+            href="seller/index.html"
+            class="btn"
+            style="width:100%;background:var(--green);color:#fff;
+                   box-shadow:0 8px 32px rgba(29,158,117,0.3)"
+          >
+            Start selling free
+            <i class="ti ti-arrow-right"></i>
+          </a>
+
+          <div style="text-align:center;font-size:12px;
+                      color:var(--text-secondary);margin-top:12px">
+            No credit card required · Live in 5 minutes
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section class="compare-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Compare</div>
+        <h2>Anvaye vs other platforms</h2>
+        <div class="divider"></div>
+      </div>
+
+      <table class="compare-table reveal">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>🟠 Anvaye</th>
+            <th>Others</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Monthly seller fee</td>
+            <td style="color:var(--green);font-weight:700">₹0</td>
+            <td style="color:var(--red-av);font-weight:700">₹500–₹2000</td>
+          </tr>
+          <tr>
+            <td>Commission per sale</td>
+            <td style="color:var(--green);font-weight:700">3%</td>
+            <td style="color:var(--red-av);font-weight:700">10–30%</td>
+          </tr>
+          <tr>
+            <td>Direct UPI to seller</td>
+            <td><span class="c-yes">✓</span></td>
+            <td><span class="c-no">✗</span></td>
+          </tr>
+          <tr>
+            <td>Verified reviews only</td>
+            <td><span class="c-yes">✓</span></td>
+            <td><span class="c-no">✗</span></td>
+          </tr>
+          <tr>
+            <td>Instagram integration</td>
+            <td><span class="c-yes">✓</span></td>
+            <td><span class="c-no">✗</span></td>
+          </tr>
+          <tr>
+            <td>Payment holding period</td>
+            <td style="color:var(--green);font-weight:700">None</td>
+            <td style="color:var(--red-av);font-weight:700">7–14 days</td>
+          </tr>
+          <tr>
+            <td>Setup time</td>
+            <td style="color:var(--green);font-weight:700">5 mins</td>
+            <td style="color:var(--red-av);font-weight:700">Days</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="pricing-faq">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">FAQ</div>
+        <h2>Pricing questions answered</h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="accordion">
+
+        <div class="accordion-item">
+          <button class="accordion-btn" data-accordion>
+            Is there a free plan for buyers?
+            <i class="ti ti-plus accordion-icon"></i>
+          </button>
+          <div class="accordion-body">
+            Yes! Browsing and ordering from free sellers is completely free
+            with no subscription needed. Anvaye Pass (₹50 / 15 days) unlocks
+            all sellers and removes per-order fees.
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-btn" data-accordion>
+            Does the 3% fee include payment gateway charges?
+            <i class="ti ti-plus accordion-icon"></i>
+          </button>
+          <div class="accordion-body">
+            The 3% is Anvaye's commission. Razorpay may charge a small
+            additional processing fee (typically 2%) which is standard
+            across all Indian payment gateways.
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-btn" data-accordion>
+            Can I cancel Anvaye Pass anytime?
+            <i class="ti ti-plus accordion-icon"></i>
+          </button>
+          <div class="accordion-body">
+            Yes. You can cancel your Anvaye Pass subscription at any time.
+            You'll retain access until the end of your current 15-day period.
+            No questions asked.
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-btn" data-accordion>
+            Are there any hidden fees for sellers?
+            <i class="ti ti-plus accordion-icon"></i>
+          </button>
+          <div class="accordion-body">
+            Absolutely none. No listing fees, no monthly fees, no setup fees.
+            The only cost is 3% when you make a sale.
+            If you don't sell, you pay nothing.
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-btn" data-accordion>
+            What happens after my Anvaye Pass expires?
+            <i class="ti ti-plus accordion-icon"></i>
+          </button>
+          <div class="accordion-body">
+            You automatically revert to the free plan.
+            You can still browse and order from free sellers.
+            Simply renew your pass for ₹50 to unlock all sellers again.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="pricing-cta">
+    <div class="container">
+      <h2>Start for free today</h2>
+      <p>No credit card required. Live in minutes.</p>
+      <div class="pricing-cta-actions">
+        <a href="buyer/index.html" class="btn btn-primary btn-lg">
+          Shop as buyer
+          <i class="ti ti-arrow-right"></i>
+        </a>
+        <a
+          href="seller/index.html"
+          class="btn btn-lg"
+          style="background:var(--green);color:#fff;
+                 box-shadow:0 8px 32px rgba(29,158,117,0.3)"
+        >
+          Sell for free
+          <i class="ti ti-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="nav-logo">Anvaye</span>
+          <p>One stop shop for your wish-list.
+             Connecting buyers with verified Instagram
+             sellers across India.</p>
+          <div class="footer-social">
+            <button class="social-btn" aria-label="Instagram">
+              <i class="ti ti-brand-instagram"></i>
+            </button>
+            <button class="social-btn" aria-label="Twitter">
+              <i class="ti ti-brand-twitter"></i>
+            </button>
+            <button class="social-btn" aria-label="WhatsApp">
+              <i class="ti ti-brand-whatsapp"></i>
+            </button>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="buyer/index.html">For Buyers</a></li>
+            <li><a href="seller/index.html">For Sellers</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="how-it-works.html">How it works</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Seller Guide</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Refund Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span class="current-year"></span> Anvaye. All rights reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    /* Accordion */
+    document.querySelectorAll('[data-accordion]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const body = btn.nextElementSibling;
+        const isOpen = body.classList.contains('open');
+
+        /* Close all */
+        document.querySelectorAll('.accordion-body').forEach(b => {
+          b.classList.remove('open');
+        });
+        document.querySelectorAll('.accordion-btn').forEach(b => {
+          b.classList.remove('open');
+        });
+
+        /* Open clicked if it was closed */
+        if (!isOpen) {
+          body.classList.add('open');
+          btn.classList.add('open');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
