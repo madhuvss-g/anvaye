@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://madhuvss-g.github.io/anvaye-website/sitemap.xml
