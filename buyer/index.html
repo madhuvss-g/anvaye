@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anvaye — Shop from Verified Sellers</title>
+  <meta name="description" content="Discover unique Instagram sellers, shop securely via UPI, and get everything on your wish-list with Anvaye." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/buyer.css" />
+
+  <style>
+    /* ── OTP PAGE ── */
+    .auth-wrap {
+      min-height:      100vh;
+      background:      var(--bg-dark);
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      padding:         100px 24px 40px;
+      position:        relative;
+      overflow:        hidden;
+    }
+
+    .auth-wrap::before {
+      content:   '';
+      position:  absolute;
+      inset:     0;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(255,92,43,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 50%, rgba(239,159,39,0.08) 0%, transparent 60%);
+    }
+
+    .auth-card {
+      background:    var(--bg-dark-2);
+      border-radius: var(--r-xl);
+      border:        1px solid rgba(255,255,255,0.08);
+      padding:       48px 40px;
+      width:         100%;
+      max-width:     440px;
+      position:      relative;
+      z-index:       1;
+      animation:     scaleIn 0.4s var(--bounce);
+    }
+
+    .auth-logo {
+      font-size:     28px;
+      font-weight:   800;
+      color:         var(--brand);
+      margin-bottom: 8px;
+    }
+
+    .auth-title {
+      font-size:     24px;
+      font-weight:   800;
+      color:         #fff;
+      margin-bottom: 8px;
+    }
+
+    .auth-sub {
+      font-size:     15px;
+      color:         rgba(255,255,255,0.5);
+      margin-bottom: 32px;
+      line-height:   1.6;
+    }
+
+    .phone-row {
+      display: flex;
+      gap:     10px;
+    }
+
+    .phone-code {
+      width:         72px;
+      flex-shrink:   0;
+      background:    rgba(255,255,255,0.06);
+      border:        1.5px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-sm);
+      padding:       13px 12px;
+      font-size:     15px;
+      font-weight:   600;
+      color:         rgba(255,255,255,0.6);
+      text-align:    center;
+      font-family:   var(--font);
+    }
+
+    .auth-inp {
+      width:         100%;
+      border:        1.5px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-sm);
+      padding:       13px 16px;
+      font-size:     15px;
+      font-family:   var(--font);
+      background:    rgba(255,255,255,0.06);
+      color:         #fff;
+      outline:       none;
+      transition:    border-color var(--speed), box-shadow var(--speed);
+    }
+
+    .auth-inp:focus {
+      border-color: var(--brand);
+      box-shadow:   0 0 0 4px var(--brand-dim);
+    }
+
+    .auth-inp::placeholder { color: rgba(255,255,255,0.25); }
+
+    /* OTP inputs */
+    .otp-row {
+      display:         flex;
+      gap:             12px;
+      justify-content: center;
+      margin:          24px 0;
+    }
+
+    .otp-input {
+      width:         64px;
+      height:        68px;
+      border:        1.5px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-sm);
+      font-size:     28px;
+      font-weight:   700;
+      text-align:    center;
+      background:    rgba(255,255,255,0.06);
+      color:         #fff;
+      outline:       none;
+      font-family:   var(--font);
+      transition:    border-color var(--speed), box-shadow var(--speed);
+    }
+
+    .otp-input:focus {
+      border-color: var(--brand);
+      box-shadow:   0 0 0 4px var(--brand-dim);
+    }
+
+    .resend-row {
+      text-align:  center;
+      font-size:   13px;
+      color:       rgba(255,255,255,0.4);
+      margin-top:  16px;
+    }
+
+    .resend-btn {
+      background:  none;
+      border:      none;
+      color:       var(--brand);
+      font-size:   13px;
+      font-weight: 600;
+      cursor:      pointer;
+      font-family: var(--font);
+      transition:  opacity var(--speed);
+    }
+
+    .resend-btn:disabled { opacity: 0.4; cursor: default; }
+
+    .auth-divider {
+      text-align:  center;
+      font-size:   13px;
+      color:       rgba(255,255,255,0.3);
+      margin:      20px 0;
+      position:    relative;
+    }
+
+    .auth-divider::before,
+    .auth-divider::after {
+      content:    '';
+      position:   absolute;
+      top:        50%;
+      width:      40%;
+      height:     1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .auth-divider::before { left:  0; }
+    .auth-divider::after  { right: 0; }
+
+    .auth-back {
+      display:         flex;
+      align-items:     center;
+      gap:             6px;
+      font-size:       13px;
+      color:           rgba(255,255,255,0.4);
+      cursor:          pointer;
+      background:      none;
+      border:          none;
+      font-family:     var(--font);
+      margin-top:      20px;
+      transition:      color var(--speed);
+      text-decoration: none;
+    }
+
+    .auth-back:hover { color: #fff; }
+
+    /* ── BUYER HOME PAGE ── */
+    .buyer-home {
+      min-height: 100vh;
+      background: var(--bg-tertiary);
+      padding-top: 80px;
+    }
+
+    .buyer-topbar {
+      background:    var(--bg-dark);
+      padding:       20px 0;
+      position:      sticky;
+      top:           72px;
+      z-index:       100;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .buyer-topbar .container {
+      display:     flex;
+      align-items: center;
+      gap:         16px;
+    }
+
+    .search-wrap {
+      flex:          1;
+      position:      relative;
+    }
+
+    .search-wrap i {
+      position:    absolute;
+      left:        14px;
+      top:         50%;
+      transform:   translateY(-50%);
+      font-size:   18px;
+      color:       rgba(255,255,255,0.3);
+      pointer-events: none;
+    }
+
+    .search-field {
+      width:         100%;
+      background:    rgba(255,255,255,0.07);
+      border:        1px solid rgba(255,255,255,0.08);
+      border-radius: var(--r-md);
+      padding:       11px 16px 11px 44px;
+      font-size:     14px;
+      color:         #fff;
+      font-family:   var(--font);
+      outline:       none;
+      transition:    border-color var(--speed), background var(--speed);
+    }
+
+    .search-field:focus {
+      border-color: var(--brand);
+      background:   rgba(255,255,255,0.10);
+    }
+
+    .search-field::placeholder { color: rgba(255,255,255,0.3); }
+
+    /* Sub strip */
+    .sub-strip {
+      background:    linear-gradient(135deg, var(--brand), #E04D22);
+      border-radius: var(--r-lg);
+      padding:       20px 24px;
+      display:       flex;
+      justify-content: space-between;
+      align-items:   center;
+      gap:           16px;
+      margin:        20px 0;
+      position:      relative;
+      overflow:      hidden;
+    }
+
+    .sub-strip::before {
+      content:   '';
+      position:  absolute;
+      top:       -20px;
+      right:     -20px;
+      width:     120px;
+      height:    120px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .sub-strip-title {
+      font-size:   18px;
+      font-weight: 800;
+      color:       #fff;
+    }
+
+    .sub-strip-sub {
+      font-size:  13px;
+      color:      rgba(255,255,255,0.75);
+      margin-top: 3px;
+    }
+
+    .sub-strip-btn {
+      background:    #fff;
+      color:         var(--brand);
+      border:        none;
+      border-radius: var(--r-sm);
+      padding:       10px 20px;
+      font-size:     13px;
+      font-weight:   700;
+      cursor:        pointer;
+      flex-shrink:   0;
+      font-family:   var(--font);
+      transition:    transform var(--speed);
+      position:      relative;
+      z-index:       1;
+    }
+
+    .sub-strip-btn:hover { transform: scale(1.05); }
+
+    /* Section label */
+    .sec-label {
+      font-size:      11px;
+      font-weight:    700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color:          var(--text-secondary);
+      margin:         24px 0 12px;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align:  center;
+      padding:     48px 24px;
+      color:       var(--text-secondary);
+      font-size:   15px;
+      display:     none;
+    }
+
+    /* ── STORE PAGE ── */
+    .store-header {
+      background:  var(--bg-dark);
+      padding:     80px 0 40px;
+    }
+
+    .store-header-inner {
+      display:     flex;
+      align-items: center;
+      gap:         20px;
+    }
+
+    .store-av {
+      width:           72px;
+      height:          72px;
+      border-radius:   50%;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      font-size:       24px;
+      font-weight:     800;
+      flex-shrink:     0;
+      background:      var(--brand-dim);
+      color:           var(--brand);
+      border:          3px solid var(--brand);
+    }
+
+    .store-name {
+      font-size:   24px;
+      font-weight: 800;
+      color:       #fff;
+    }
+
+    .store-handle {
+      font-size:  14px;
+      color:      rgba(255,255,255,0.5);
+      margin-top: 3px;
+    }
+
+    .store-stats {
+      display:    flex;
+      gap:        32px;
+      margin-top: 16px;
+    }
+
+    .store-stat-val {
+      font-size:   20px;
+      font-weight: 800;
+      color:       #fff;
+    }
+
+    .store-stat-lbl {
+      font-size:  12px;
+      color:      rgba(255,255,255,0.45);
+      margin-top: 2px;
+    }
+
+    .store-tabs {
+      display:       flex;
+      gap:           0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-top:    24px;
+    }
+
+    .store-tab {
+      padding:     12px 20px;
+      font-size:   14px;
+      font-weight: 600;
+      color:       rgba(255,255,255,0.45);
+      cursor:      pointer;
+      background:  none;
+      border:      none;
+      font-family: var(--font);
+      border-bottom: 2px solid transparent;
+      transition:  all var(--speed);
+      margin-bottom: -1px;
+    }
+
+    .store-tab.active,
+    .store-tab:hover {
+      color:        #fff;
+      border-color: var(--brand);
+    }
+
+    /* ── SUBSCRIPTION PAGE ── */
+    .sub-page {
+      min-height:  100vh;
+      background:  var(--bg-dark);
+      padding-top: 80px;
+    }
+
+    .sub-page-hero {
+      text-align:  center;
+      padding:     60px 24px 40px;
+      position:    relative;
+      overflow:    hidden;
+    }
+
+    .sub-page-hero::before {
+      content:   '';
+      position:  absolute;
+      inset:     0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(255,92,43,0.2), transparent 70%);
+    }
+
+    .sub-page-hero h1 {
+      color:         #fff;
+      position:      relative;
+      z-index:       1;
+      margin-bottom: 12px;
+    }
+
+    .sub-page-hero p {
+      color:     rgba(255,255,255,0.55);
+      position:  relative;
+      z-index:   1;
+      font-size: 18px;
+    }
+
+    .sub-card-wrap {
+      max-width: 480px;
+      margin:    0 auto;
+      padding:   0 24px 80px;
+    }
+
+    .sub-card {
+      background:    var(--bg-dark-2);
+      border-radius: var(--r-xl);
+      border:        1px solid rgba(255,255,255,0.08);
+      padding:       40px;
+      text-align:    center;
+      position:      relative;
+      overflow:      hidden;
+      animation:     scaleIn 0.4s var(--bounce);
+    }
+
+    .sub-card::before {
+      content:    '';
+      position:   absolute;
+      top:        0;
+      left:       0;
+      right:      0;
+      height:     3px;
+      background: linear-gradient(90deg, var(--brand), var(--amber));
+    }
+
+    .sub-card-price {
+      font-size:   64px;
+      font-weight: 800;
+      color:       var(--brand);
+      line-height: 1;
+    }
+
+    .sub-card-period {
+      font-size:     15px;
+      color:         rgba(255,255,255,0.45);
+      margin-top:    8px;
+      margin-bottom: 32px;
+    }
+
+    /* ── CONFIRMED PAGE ── */
+    .confirmed-page {
+      min-height:      100vh;
+      background:      var(--bg-dark);
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      padding:         100px 24px 40px;
+    }
+
+    .confirmed-card {
+      background:    var(--bg-dark-2);
+      border-radius: var(--r-xl);
+      border:        1px solid rgba(255,255,255,0.08);
+      padding:       48px 40px;
+      width:         100%;
+      max-width:     480px;
+      text-align:    center;
+      animation:     scaleIn 0.5s var(--bounce);
+    }
+
+    .confirmed-icon {
+      width:           80px;
+      height:          80px;
+      border-radius:   50%;
+      background:      var(--brand-dim);
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      font-size:       40px;
+      margin:          0 auto 24px;
+      animation:       scaleIn 0.5s var(--bounce) 0.2s both;
+    }
+
+    .confirmed-title {
+      font-size:     28px;
+      font-weight:   800;
+      color:         #fff;
+      margin-bottom: 10px;
+    }
+
+    .confirmed-sub {
+      font-size:     15px;
+      color:         rgba(255,255,255,0.5);
+      line-height:   1.7;
+      margin-bottom: 8px;
+    }
+
+    .confirmed-id {
+      font-size:     14px;
+      font-weight:   700;
+      color:         var(--brand);
+      margin-bottom: 32px;
+    }
+
+    .confirmed-summary {
+      background:    rgba(255,255,255,0.05);
+      border-radius: var(--r-md);
+      padding:       20px;
+      text-align:    left;
+      margin-bottom: 28px;
+      border:        1px solid rgba(255,255,255,0.06);
+    }
+
+    .confirmed-row {
+      display:         flex;
+      justify-content: space-between;
+      font-size:       14px;
+      margin-bottom:   10px;
+    }
+
+    .confirmed-row:last-child { margin-bottom: 0; }
+
+    .confirmed-row-label { color: rgba(255,255,255,0.45); }
+    .confirmed-row-val   { color: #fff; font-weight: 500; }
+
+    /* ── TRACKING PAGE ── */
+    .tracking-page {
+      min-height:  100vh;
+      background:  var(--bg-dark);
+      padding-top: 80px;
+    }
+
+    .tracking-inner {
+      max-width: 600px;
+      margin:    0 auto;
+      padding:   40px 24px 80px;
+    }
+
+    .tracking-card {
+      background:    var(--bg-dark-2);
+      border-radius: var(--r-xl);
+      border:        1px solid rgba(255,255,255,0.08);
+      padding:       32px;
+    }
+
+    .tracking-card-title {
+      font-size:     18px;
+      font-weight:   700;
+      color:         #fff;
+      margin-bottom: 28px;
+    }
+
+    /* Override track styles for dark bg */
+    .track-label         { color: #fff !important; }
+    .track-label-pending { color: rgba(255,255,255,0.35) !important; }
+    .track-time          { color: rgba(255,255,255,0.4) !important; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      .auth-card    { padding: 32px 24px; }
+      .otp-input    { width: 52px; height: 56px; font-size: 22px; }
+      .confirmed-card { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar" style="background:rgba(13,13,13,0.95);backdrop-filter:blur(20px)">
+    <div class="container">
+      <a href="../index.html" class="nav-logo">Anvaye</a>
+
+      <div class="nav-links">
+        <a href="../index.html#features">Features</a>
+        <a href="../how-it-works.html">How it works</a>
+        <a href="../pricing.html">Pricing</a>
+        <a href="../faq.html">FAQ</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="../seller/index.html" class="nav-signin">Sell on Anvaye</a>
+        <a href="#phone" class="btn btn-primary btn-sm">Sign in</a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="nav-mobile" id="navMobile">
+    <button class="nav-mobile-close" id="navMobileClose">✕</button>
+    <a href="../index.html">Home</a>
+    <a href="../how-it-works.html">How it works</a>
+    <a href="../pricing.html">Pricing</a>
+    <a href="../faq.html">FAQ</a>
+    <a href="../seller/index.html">Sell on Anvaye</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PHONE ENTRY
+  ═══════════════════════════════════════════ -->
+  <div class="auth-wrap" id="phonePage">
+    <div class="auth-card">
+
+      <div class="auth-logo">Anvaye</div>
+      <div class="auth-title">Welcome, Buyer 👋</div>
+      <div class="auth-sub">
+        Enter your mobile number to get started.
+        We'll send you a one-time code.
+      </div>
+
+      <form id="phoneForm">
+        <div class="phone-row" style="margin-bottom:16px">
+          <div class="phone-code">+91</div>
+          <input
+            class="auth-inp"
+            type="tel"
+            id="phoneInput"
+            inputmode="numeric"
+            placeholder="98765 43210"
+            maxlength="10"
+            required
+            aria-label="Mobile number"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%">
+          Send OTP
+          <i class="ti ti-arrow-right"></i>
+        </button>
+      </form>
+
+      <div class="auth-divider">or</div>
+
+      <div style="text-align:center;font-size:13px;color:rgba(255,255,255,0.4)">
+        By continuing you agree to our
+        <a href="#" style="color:var(--brand)">Terms</a> &
+        <a href="#" style="color:var(--brand)">Privacy Policy</a>
+      </div>
+
+      <a href="../index.html" class="auth-back">
+        <i class="ti ti-arrow-left"></i>
+        Back to home
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       OTP VERIFICATION
+       Hidden by default — shown after phone submit
+  ═══════════════════════════════════════════ -->
+  <div class="auth-wrap" id="otpPage" style="display:none">
+    <div class="auth-card">
+
+      <div class="auth-logo">Anvaye</div>
+      <div class="auth-title">Verify OTP 🔐</div>
+      <div class="auth-sub" id="otpSubText">
+        Sent to +91 XXXXXXXXXX
+      </div>
+
+      <form id="otpForm">
+        <div class="otp-row" role="group" aria-label="OTP input">
+          <input class="otp-input" maxlength="1" inputmode="numeric"
+            autocomplete="one-time-code" aria-label="Digit 1" />
+          <input class="otp-input" maxlength="1" inputmode="numeric"
+            aria-label="Digit 2" />
+          <input class="otp-input" maxlength="1" inputmode="numeric"
+            aria-label="Digit 3" />
+          <input class="otp-input" maxlength="1" inputmode="numeric"
+            aria-label="Digit 4" />
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%">
+          Verify & Continue
+          <i class="ti ti-arrow-right"></i>
+        </button>
+      </form>
+
+      <div class="resend-row" style="margin-top:16px">
+        <button class="resend-btn" id="resendBtn" disabled>
+          Resend OTP
+        </button>
+        <span id="resendTimer"> in 30s</span>
+      </div>
+
+      <button class="auth-back" onclick="showPage('phonePage')">
+        <i class="ti ti-arrow-left"></i>
+        Change number
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       BUYER HOME
+       Hidden by default — shown after OTP verify
+  ═══════════════════════════════════════════ -->
+  <div id="homePage" style="display:none">
+
+    <div class="buyer-home">
+
+      <!-- Search topbar -->
+      <div class="buyer-topbar">
+        <div class="container">
+          <div class="search-wrap">
+            <i class="ti ti-search"></i>
+            <input
+              class="search-field"
+              type="text"
+              id="sellerSearch"
+              placeholder="Search by @instagramid or store name"
+              aria-label="Search sellers"
+            />
+          </div>
+          <button
+            class="btn btn-primary btn-sm"
+            onclick="showPage('subPage')"
+          >
+            <i class="ti ti-crown"></i>
+            Anvaye Pass
+          </button>
+        </div>
+      </div>
+
+      <div class="container" style="padding-top:24px;padding-bottom:80px">
+
+        <!-- Subscription strip -->
+        <div class="sub-strip">
+          <div>
+            <div class="sub-strip-title">🔓 Unlock all sellers</div>
+            <div class="sub-strip-sub">₹50 · 15 days · unlimited orders · no per-order fee</div>
+          </div>
+          <button
+            class="sub-strip-btn"
+            onclick="showPage('subPage')"
+          >Subscribe</button>
+        </div>
+
+        <!-- Free sellers -->
+        <div class="sec-label">Free to browse</div>
+
+        <div class="sellers-grid" id="sellersGrid">
+
+          <div class="seller-card-wrap">
+            <button
+              class="seller-card"
+              onclick="showPage('storePage')"
+              aria-label="View Crochet by Riya"
+            >
+              <div class="seller-card-top">
+                <div class="seller-av seller-av-orange">CR</div>
+                <div>
+                  <div class="seller-card-name">Crochet by Riya</div>
+                  <div class="seller-card-handle">@crochet.riya.hyd</div>
+                </div>
+                <span class="badge badge-green" style="margin-left:auto">✓ Verified</span>
+              </div>
+              <div class="seller-card-stats">
+                <div>
+                  <div class="sc-stat-val">142</div>
+                  <div class="sc-stat-lbl">Reviews</div>
+                </div>
+                <div>
+                  <div class="sc-stat-val">★ 4.8</div>
+                  <div class="sc-stat-lbl">Rating</div>
+                </div>
+                <div>
+                  <div class="sc-stat-val">38</div>
+                  <div class="sc-stat-lbl">Products</div>
+                </div>
+              </div>
+            </button>
+          </div>
+
+          <div class="seller-card-wrap">
+            <button
+              class="seller-card"
+              onclick="showPage('storePage')"
+              aria-label="View Handmade by Keerthi"
+            >
+              <div class="seller-card-top">
+                <div class="seller-av seller-av-green">HK</div>
+                <div>
+                  <div class="seller-card-name">Handmade by Keerthi</div>
+                  <div class="seller-card-handle">@keerthi.makes</div>
+                </div>
+                <span class="badge badge-green" style="margin-left:auto">✓ Verified</span>
+              </div>
+              <div class="seller-card-stats">
+                <div>
+                  <div class="sc-stat-val">89</div>
+                  <div class="sc-stat-lbl">Reviews</div>
+                </div>
+                <div>
+                  <div class="sc-stat-val">★ 4.7</div>
+                  <div class="sc-stat-lbl">Rating</div>
+                </div>
+                <div>
+                  <div class="sc-stat-val">24</div>
+                  <div class="sc-stat-lbl">Products</div>
+                </div>
+              </div>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Empty search state -->
+        <div class="empty-state" id="searchEmpty">
+          No sellers found matching your search.
+        </div>
+
+        <!-- Locked sellers -->
+        <div class="sec-label" style="margin-top:32px">Subscribe to unlock</div>
+
+        <div class="sellers-grid">
+
+          <div class="seller-card-locked">
+            <div class="seller-card" style="pointer-events:none;user-select:none">
+              <div class="seller-card-top">
+                <div class="seller-av seller-av-purple">FZ</div>
+                <div>
+                  <div class="seller-card-name">Fitzone Supplements</div>
+                  <div class="seller-card-handle">@fitzone.hyd</div>
+                </div>
+              </div>
+              <div class="seller-card-stats">
+                <div><div class="sc-stat-val">67</div><div class="sc-stat-lbl">Reviews</div></div>
+                <div><div class="sc-stat-val">★ 4.6</div><div class="sc-stat-lbl">Rating</div></div>
+                <div><div class="sc-stat-val">15</div><div class="sc-stat-lbl">Products</div></div>
+              </div>
+            </div>
+            <button
+              class="lock-overlay"
+              onclick="showPage('subPage')"
+              aria-label="Subscribe to unlock"
+            >
+              <div class="lock-icon">🔒</div>
+              <div class="lock-text">Subscribe to unlock</div>
+            </button>
+          </div>
+
+          <div class="seller-card-locked">
+            <div class="seller-card" style="pointer-events:none;user-select:none">
+              <div class="seller-card-top">
+                <div class="seller-av seller-av-red">PB</div>
+                <div>
+                  <div class="seller-card-name">PotterBy Bhavna</div>
+                  <div class="seller-card-handle">@bhavna.pottery</div>
+                </div>
+              </div>
+              <div class="seller-card-stats">
+                <div><div class="sc-stat-val">54</div><div class="sc-stat-lbl">Reviews</div></div>
+                <div><div class="sc-stat-val">★ 4.9</div><div class="sc-stat-lbl">Rating</div></div>
+                <div><div class="sc-stat-val">19</div><div class="sc-stat-lbl">Products</div></div>
+              </div>
+            </div>
+            <button
+              class="lock-overlay"
+              onclick="showPage('subPage')"
+              aria-label="Subscribe to unlock"
+            >
+              <div class="lock-icon">🔒</div>
+              <div class="lock-text">Subscribe to unlock</div>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       STORE PAGE
+  ═══════════════════════════════════════════ -->
+  <div id="storePage" style="display:none">
+    <div style="min-height:100vh;background:var(--bg-tertiary);padding-top:72px">
+
+      <div class="store-header">
+        <div class="container">
+          <button
+            class="auth-back"
+            onclick="showPage('homePage')"
+            style="margin-bottom:20px"
+          >
+            <i class="ti ti-arrow-left"></i>
+            Back to home
+          </button>
+
+          <div class="store-header-inner">
+            <div class="store-av">CR</div>
+            <div>
+              <div class="store-name">Crochet by Riya</div>
+              <div class="store-handle">@crochet.riya.hyd · Hyderabad</div>
+              <div class="store-stats">
+                <div>
+                  <div class="store-stat-val">142</div>
+                  <div class="store-stat-lbl">Reviews</div>
+                </div>
+                <div>
+                  <div class="store-stat-val">★ 4.8</div>
+                  <div class="store-stat-lbl">Rating</div>
+                </div>
+                <div>
+                  <div class="store-stat-val">38</div>
+                  <div class="store-stat-lbl">Products</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="store-tabs">
+            <button class="store-tab active">Products</button>
+            <button class="store-tab">Reviews</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container" style="padding:32px 24px 80px">
+        <div class="products-grid">
+
+          <button
+            class="product-card"
+            onclick="showPage('productPage')"
+            aria-label="View Handmade Tote Bag"
+          >
+            <div class="product-img">🧶</div>
+            <div class="product-info">
+              <div class="product-name">Handmade Tote Bag</div>
+              <div class="product-price">₹549</div>
+              <div class="product-rating">★ 4.8 · 32 reviews</div>
+            </div>
+          </button>
+
+          <button
+            class="product-card"
+            onclick="showPage('productPage')"
+            aria-label="View Floral Wall Art"
+          >
+            <div class="product-img">🌸</div>
+            <div class="product-info">
+              <div class="product-name">Floral Wall Art</div>
+              <div class="product-price">₹399</div>
+              <div class="product-rating">★ 4.6 · 19 reviews</div>
+            </div>
+          </button>
+
+          <button
+            class="product-card"
+            onclick="showPage('productPage')"
+            aria-label="View Amigurumi Teddy"
+          >
+            <div class="product-img">🧸</div>
+            <div class="product-info">
+              <div class="product-name">Amigurumi Teddy</div>
+              <div class="product-price">₹799</div>
+              <div class="product-rating">★ 4.9 · 41 reviews</div>
+            </div>
+          </button>
+
+          <button
+            class="product-card"
+            onclick="showPage('productPage')"
+            aria-label="View Crochet Sling"
+          >
+            <div class="product-img">👜</div>
+            <div class="product-info">
+              <div class="product-name">Crochet Sling Bag</div>
+              <div class="product-price">₹649</div>
+              <div class="product-rating">★ 4.7 · 28 reviews</div>
+            </div>
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PRODUCT DETAIL PAGE
+  ═══════════════════════════════════════════ -->
+  <div id="productPage" style="display:none">
+    <div style="min-height:100vh;background:var(--bg-tertiary);padding-top:72px">
+
+      <div style="background:var(--bg-dark);padding:16px 0">
+        <div class="container">
+          <button
+            class="auth-back"
+            onclick="showPage('storePage')"
+          >
+            <i class="ti ti-arrow-left"></i>
+            Back to store
+          </button>
+        </div>
+      </div>
+
+      <div class="product-detail-hero">🧶</div>
+
+      <div class="container">
+        <div class="product-detail-grid">
+
+          <div style="padding:8px 0">
+            <div class="product-detail-name">Handmade Tote Bag</div>
+            <div class="product-detail-by">by Crochet by Riya · @crochet.riya.hyd</div>
+            <div class="product-detail-price">₹549</div>
+            <div class="product-detail-desc">
+              Handmade with love using premium cotton yarn.
+              Sturdy base, ideal for daily use. Available in 3 colours —
+              Ivory, Sage Green, and Terracotta. Ships within 3 business days.
+            </div>
+
+            <div class="product-tags">
+              <span class="product-tag">🌿 Handmade</span>
+              <span class="product-tag">📦 Ships in 3 days</span>
+              <span class="product-tag">★ 4.8 (32 reviews)</span>
+              <span class="product-tag">↩️ Returns as per seller policy</span>
+            </div>
+          </div>
+
+          <!-- Checkout card -->
+          <div class="checkout-card">
+            <div class="checkout-title">Payment breakdown</div>
+            <div class="checkout-row">
+              <span>Product price</span>
+              <span>₹549</span>
+            </div>
+            <div class="checkout-row">
+              <span>Platform fee</span>
+              <span style="color:var(--green)">Included ✓</span>
+            </div>
+            <div class="checkout-row">
+              <span>Delivery</span>
+              <span style="color:var(--green)">Free ✓</span>
+            </div>
+            <div class="checkout-total">
+              <span>Total</span>
+              <span>₹549</span>
+            </div>
+            <button
+              class="btn btn-primary"
+              style="width:100%"
+              id="buyBtn"
+            >
+              Pay ₹549 via UPI
+              <i class="ti ti-arrow-right"></i>
+            </button>
+            <div class="checkout-note">
+              Payment goes directly to seller · Secured by Razorpay
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SUBSCRIPTION PAGE
+  ═══════════════════════════════════════════ -->
+  <div id="subPage" style="display:none">
+    <div class="sub-page">
+
+      <div class="sub-page-hero">
+        <div class="section-tag" style="position:relative;z-index:1">
+          Anvaye Pass
+        </div>
+        <h1 style="margin-bottom:12px">Unlock all sellers</h1>
+        <p>One subscription. Unlimited access. Zero per-order fees.</p>
+      </div>
+
+      <div class="sub-card-wrap">
+        <div class="sub-card">
+
+          <div class="sub-card-price">₹50</div>
+          <div class="sub-card-period">for 15 days · any seller · unlimited orders</div>
+
+          <div class="sub-features">
+            <div class="sub-feature">
+              <div class="sub-chk">✓</div>
+              Order from any seller on Anvaye
+            </div>
+            <div class="sub-feature">
+              <div class="sub-chk">✓</div>
+              No per-order platform fee
+            </div>
+            <div class="sub-feature">
+              <div class="sub-chk">✓</div>
+              Unlimited orders for 15 days
+            </div>
+            <div class="sub-feature">
+              <div class="sub-chk">✓</div>
+              Leave verified reviews after purchase
+            </div>
+            <div class="sub-feature">
+              <div class="sub-chk">✓</div>
+              Real-time order tracking on every purchase
+            </div>
+            <div class="sub-feature">
+              <div class="sub-chk">✓</div>
+              Priority customer support
+            </div>
+          </div>
+
+          <button
+            class="btn btn-primary"
+            style="width:100%"
+            id="subPayBtn"
+          >
+            Pay ₹50 & Activate Pass
+            <i class="ti ti-crown"></i>
+          </button>
+
+          <div style="
+            font-size:   12px;
+            color:       rgba(255,255,255,0.3);
+            margin-top:  12px;
+            line-height: 1.6;
+          ">
+            Secured by Razorpay · Auto-renews after 15 days · Cancel anytime
+          </div>
+
+        </div>
+
+        <button
+          class="auth-back"
+          style="margin:16px auto;display:flex"
+          onclick="showPage('homePage')"
+        >
+          <i class="ti ti-arrow-left"></i>
+          Back to home
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       ORDER CONFIRMED PAGE
+  ═══════════════════════════════════════════ -->
+  <div id="confirmedPage" style="display:none">
+    <div class="confirmed-page">
+      <div class="confirmed-card">
+
+        <div class="confirmed-icon">✅</div>
+        <div class="confirmed-title">Order placed!</div>
+        <div class="confirmed-sub">
+          Payment confirmed directly to seller.<br />
+          You'll receive updates as your order progresses.
+        </div>
+        <div class="confirmed-id">Order ID: #AN-10482</div>
+
+        <div class="confirmed-summary">
+          <div class="confirmed-row">
+            <span class="confirmed-row-label">Product</span>
+            <span class="confirmed-row-val">Handmade Tote Bag</span>
+          </div>
+          <div class="confirmed-row">
+            <span class="confirmed-row-label">Seller</span>
+            <span class="confirmed-row-val">@crochet.riya.hyd</span>
+          </div>
+          <div class="confirmed-row">
+            <span class="confirmed-row-label">Amount paid</span>
+            <span class="confirmed-row-val" style="color:var(--brand);font-weight:700">₹549</span>
+          </div>
+          <div class="confirmed-row">
+            <span class="confirmed-row-label">Status</span>
+            <span class="confirmed-row-val" style="color:var(--green)">✓ Confirmed</span>
+          </div>
+        </div>
+
+        <button
+          class="btn btn-primary"
+          style="width:100%;margin-bottom:12px"
+          onclick="showPage('homePage')"
+        >
+          Back to home
+        </button>
+
+        <button
+          class="btn btn-dark"
+          style="width:100%"
+          onclick="showPage('trackingPage')"
+        >
+          Track my order
+          <i class="ti ti-map-pin"></i>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       ORDER TRACKING PAGE
+  ═══════════════════════════════════════════ -->
+  <div id="trackingPage" style="display:none">
+    <div class="tracking-page">
+      <div class="tracking-inner">
+
+        <button
+          class="auth-back"
+          style="margin-bottom:24px"
+          onclick="showPage('confirmedPage')"
+        >
+          <i class="ti ti-arrow-left"></i>
+          Back to order
+        </button>
+
+        <div style="margin-bottom:24px">
+          <div class="tracking-id" style="color:#fff">Order #AN-10482</div>
+          <div class="tracking-meta">
+            Handmade Tote Bag · @crochet.riya.hyd
+          </div>
+        </div>
+
+        <div class="tracking-card">
+          <div class="tracking-card-title">Order tracking</div>
+
+          <div class="track-steps">
+
+            <!-- Step 1 — Done -->
+            <div class="track-step">
+              <div class="track-col">
+                <div class="track-dot td-done">✓</div>
+                <div class="track-line tl-done"></div>
+              </div>
+              <div class="track-info">
+                <div class="track-label">Payment confirmed</div>
+                <div class="track-time">Today, 10:42 AM</div>
+              </div>
+            </div>
+
+            <!-- Step 2 — Done -->
+            <div class="track-step">
+              <div class="track-col">
+                <div class="track-dot td-done">✓</div>
+                <div class="track-line tl-done"></div>
+              </div>
+              <div class="track-info">
+                <div class="track-label">Seller confirmed order</div>
+                <div class="track-time">Today, 11:05 AM</div>
+              </div>
+            </div>
+
+            <!-- Step 3 — Active -->
+            <div class="track-step">
+              <div class="track-col">
+                <div class="track-dot td-active">📦</div>
+                <div class="track-line tl-pending"></div>
+              </div>
+              <div class="track-info">
+                <div class="track-label">Packing in progress</div>
+                <div class="track-time track-time-active">In progress</div>
+              </div>
+            </div>
+
+            <!-- Step 4 — Pending -->
+            <div class="track-step">
+              <div class="track-col">
+                <div class="track-dot td-pending">🚚</div>
+                <div class="track-line tl-pending"></div>
+              </div>
+              <div class="track-info">
+                <div class="track-label track-label-pending">Shipped</div>
+                <div class="track-time">Waiting</div>
+              </div>
+            </div>
+
+            <!-- Step 5 — Pending -->
+            <div class="track-step">
+              <div class="track-col">
+                <div class="track-dot td-pending">🏠</div>
+              </div>
+              <div class="track-info">
+                <div class="track-label track-label-pending">Delivered</div>
+                <div class="track-time">Waiting</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <button
+          class="btn btn-dark"
+          style="width:100%;margin-top:16px"
+          onclick="showPage('homePage')"
+        >
+          Back to home
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/main.js"></script>
+  <script src="../js/buyer.js"></script>
+  <script>
+    /* ── PAGE SWITCHER ── */
+    // All pages in buyer flow
+    const buyerPages = [
+      'phonePage',
+      'otpPage',
+      'homePage',
+      'storePage',
+      'productPage',
+      'subPage',
+      'confirmedPage',
+      'trackingPage'
+    ];
+
+    function showPage(pageId) {
+      // Hide all pages
+      buyerPages.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
+
+      // Show target page
+      const target = document.getElementById(pageId);
+      if (target) {
+        target.style.display = 'block';
+        // Animate in
+        target.style.opacity   = '0';
+        target.style.transform = 'translateY(12px)';
+        target.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        requestAnimationFrame(() => {
+          target.style.opacity   = '1';
+          target.style.transform = 'translateY(0)';
+        });
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    /* ── OVERRIDE PHONE FORM ── */
+    // Show OTP page after phone submit
+    document.getElementById('phoneForm')
+      ?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const phone = document.getElementById('phoneInput')?.value.trim();
+        const phoneRegex = /^[6-9]\d{9}$/;
+        if (!phoneRegex.test(phone)) return;
+
+        // Update OTP sub text
+        document.getElementById('otpSubText').textContent =
+          'Sent to +91 ' + phone;
+
+        showToast('OTP sent to +91 ' + phone);
+        showPage('otpPage');
+      });
+
+    /* ── OVERRIDE OTP FORM ── */
+    // Show home page after OTP verify
+    document.getElementById('otpForm')
+      ?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const inputs = document.querySelectorAll('.otp-input');
+        const otp    = [...inputs].map(i => i.value).join('');
+        if (otp.length < 4) return;
+        showPage('homePage');
+      });
+
+    /* ── OVERRIDE BUY BTN ── */
+    document.getElementById('buyBtn')
+      ?.addEventListener('click', () => {
+        showPage('confirmedPage');
+      });
+
+    /* ── OVERRIDE SUB PAY BTN ── */
+    document.getElementById('subPayBtn')
+      ?.addEventListener('click', () => {
+        showToast('🎉 Anvaye Pass activated!');
+        setTimeout(() => showPage('homePage'), 1200);
+      });
+  </script>
+
+</body>
+</html>
