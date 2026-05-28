@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Anvaye Works — Buyers & Sellers</title>
+  <meta name="description" content="Learn how Anvaye works for buyers and sellers. Simple, secure, and fast. Shop from verified Instagram sellers or list your products in minutes." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/main.css" />
+
+  <style>
+    /* ── HERO ── */
+    .hiw-hero {
+      background:  var(--bg-dark);
+      padding:     140px 0 80px;
+      text-align:  center;
+      position:    relative;
+      overflow:    hidden;
+    }
+
+    .hiw-hero::before {
+      content:   '';
+      position:  absolute;
+      inset:     0;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(255,92,43,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 50%, rgba(29,158,117,0.10) 0%, transparent 60%);
+    }
+
+    .hiw-hero::after {
+      content:    '';
+      position:   absolute;
+      inset:      0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events:  none;
+    }
+
+    .hiw-hero-inner {
+      position: relative;
+      z-index:  1;
+    }
+
+    .hiw-hero h1 { color: #fff; margin-bottom: 16px; }
+
+    .hiw-hero p {
+      color:     rgba(255,255,255,0.55);
+      font-size: 20px;
+      max-width: 560px;
+      margin:    0 auto 40px;
+    }
+
+    .hiw-hero-tabs {
+      display:         flex;
+      gap:             12px;
+      justify-content: center;
+      flex-wrap:       wrap;
+    }
+
+    .hiw-tab-btn {
+      padding:       12px 28px;
+      border-radius: var(--r-md);
+      font-size:     15px;
+      font-weight:   600;
+      cursor:        pointer;
+      border:        1.5px solid rgba(255,255,255,0.15);
+      background:    rgba(255,255,255,0.06);
+      color:         rgba(255,255,255,0.6);
+      font-family:   var(--font);
+      transition:    all var(--speed) var(--ease);
+    }
+
+    .hiw-tab-btn.active-buyer {
+      background:   var(--brand);
+      border-color: var(--brand);
+      color:        #fff;
+      box-shadow:   var(--shadow-brand);
+    }
+
+    .hiw-tab-btn.active-seller {
+      background:   var(--green);
+      border-color: var(--green);
+      color:        #fff;
+      box-shadow:   0 8px 32px rgba(29,158,117,0.35);
+    }
+
+    /* ── FLOW SECTION ── */
+    .flow-section {
+      padding: 100px 0;
+    }
+
+    .flow-section-buyer  { background: var(--bg-primary); }
+    .flow-section-seller { background: var(--bg-secondary); }
+
+    .flow-header {
+      display:       flex;
+      align-items:   center;
+      gap:           16px;
+      margin-bottom: 64px;
+    }
+
+    .flow-header-icon {
+      width:           56px;
+      height:          56px;
+      border-radius:   16px;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      font-size:       28px;
+      flex-shrink:     0;
+    }
+
+    .flow-header-icon-buyer  { background: var(--brand-dim); }
+    .flow-header-icon-seller { background: var(--green-dim); }
+
+    .flow-header-title {
+      font-size:   28px;
+      font-weight: 800;
+      color:       var(--text-primary);
+    }
+
+    .flow-header-sub {
+      font-size:  15px;
+      color:      var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    /* ── STEP TIMELINE ── */
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin:    0 auto;
+    }
+
+    .timeline::before {
+      content:    '';
+      position:   absolute;
+      left:       31px;
+      top:        0;
+      bottom:     0;
+      width:      2px;
+      background: linear-gradient(
+        180deg,
+        var(--brand) 0%,
+        var(--amber) 50%,
+        transparent 100%
+      );
+    }
+
+    .timeline-seller::before {
+      background: linear-gradient(
+        180deg,
+        var(--green) 0%,
+        var(--brand) 50%,
+        transparent 100%
+      );
+    }
+
+    .timeline-step {
+      display:       flex;
+      gap:           28px;
+      align-items:   flex-start;
+      margin-bottom: 48px;
+      position:      relative;
+    }
+
+    .timeline-step:last-child { margin-bottom: 0; }
+
+    .timeline-num {
+      width:           64px;
+      height:          64px;
+      border-radius:   50%;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      font-size:       22px;
+      font-weight:     800;
+      flex-shrink:     0;
+      position:        relative;
+      z-index:         1;
+      border:          3px solid var(--bg-primary);
+    }
+
+    .tn-buyer  {
+      background: var(--brand);
+      color:      #fff;
+      box-shadow: var(--shadow-brand);
+    }
+
+    .tn-seller {
+      background: var(--green);
+      color:      #fff;
+      box-shadow: 0 8px 24px rgba(29,158,117,0.35);
+    }
+
+    .timeline-content {
+      padding-top: 12px;
+      flex:        1;
+    }
+
+    .timeline-step-title {
+      font-size:     20px;
+      font-weight:   700;
+      color:         var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .timeline-step-desc {
+      font-size:     15px;
+      color:         var(--text-secondary);
+      line-height:   1.7;
+      margin-bottom: 16px;
+    }
+
+    .timeline-step-tip {
+      display:       inline-flex;
+      align-items:   center;
+      gap:           8px;
+      font-size:     13px;
+      font-weight:   500;
+      padding:       8px 14px;
+      border-radius: var(--r-sm);
+    }
+
+    .tip-buyer  {
+      background: var(--brand-dim);
+      color:      var(--brand);
+    }
+
+    .tip-seller {
+      background: var(--green-dim);
+      color:      var(--green);
+    }
+
+    /* ── COMPARISON TABLE ── */
+    .compare-section {
+      background: var(--bg-dark);
+      padding:    100px 0;
+    }
+
+    .compare-section h2 { color: #fff; }
+    .compare-section .section-tag { margin-bottom: 12px; }
+
+    .compare-table {
+      width:          100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top:     48px;
+      border-radius:  var(--r-lg);
+      overflow:       hidden;
+      border:         1px solid rgba(255,255,255,0.06);
+    }
+
+    .compare-table th {
+      padding:    20px 24px;
+      font-size:  14px;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    .compare-table th:first-child {
+      background: rgba(255,255,255,0.03);
+      color:      rgba(255,255,255,0.5);
+      width:      35%;
+    }
+
+    .compare-table th:nth-child(2) {
+      background: var(--brand-dim);
+      color:      var(--brand);
+      text-align: center;
+    }
+
+    .compare-table th:nth-child(3) {
+      background: var(--green-dim);
+      color:      var(--green);
+      text-align: center;
+    }
+
+    .compare-table td {
+      padding:       16px 24px;
+      font-size:     14px;
+      border-top:    1px solid rgba(255,255,255,0.04);
+    }
+
+    .compare-table td:first-child {
+      color:      rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .compare-table td:nth-child(2),
+    .compare-table td:nth-child(3) {
+      text-align:  center;
+      color:       #fff;
+      font-weight: 500;
+    }
+
+    .compare-yes { color: var(--green) !important; font-size: 18px; }
+    .compare-no  { color: rgba(255,255,255,0.2) !important; font-size: 18px; }
+
+    /* ── FAQ STRIP ── */
+    .faq-strip {
+      padding: 80px 0;
+    }
+
+    .faq-strip-grid {
+      display:               grid;
+      grid-template-columns: 1fr 1fr;
+      gap:                   20px;
+      margin-top:            48px;
+    }
+
+    .faq-item {
+      background:    var(--bg-secondary);
+      border-radius: var(--r-lg);
+      border:        1px solid var(--border-primary);
+      padding:       24px;
+      transition:    all var(--speed) var(--ease);
+    }
+
+    .faq-item:hover {
+      transform:    translateY(-4px);
+      box-shadow:   var(--shadow-md);
+      border-color: var(--brand);
+    }
+
+    .faq-q {
+      font-size:     15px;
+      font-weight:   700;
+      color:         var(--text-primary);
+      margin-bottom: 8px;
+      display:       flex;
+      align-items:   flex-start;
+      gap:           10px;
+    }
+
+    .faq-q-icon {
+      color:       var(--brand);
+      font-size:   18px;
+      flex-shrink: 0;
+      margin-top:  1px;
+    }
+
+    .faq-a {
+      font-size:   14px;
+      color:       var(--text-secondary);
+      line-height: 1.7;
+      padding-left: 28px;
+    }
+
+    /* ── CTA ── */
+    .hiw-cta {
+      background:  var(--bg-dark);
+      padding:     100px 0;
+      text-align:  center;
+      position:    relative;
+      overflow:    hidden;
+    }
+
+    .hiw-cta::before {
+      content:   '';
+      position:  absolute;
+      inset:     0;
+      background: radial-gradient(
+        ellipse at 50% 50%,
+        rgba(255,92,43,0.15) 0%,
+        transparent 70%
+      );
+    }
+
+    .hiw-cta h2 { color: #fff; position: relative; z-index: 1; }
+    .hiw-cta p  {
+      color:     rgba(255,255,255,0.55);
+      font-size: 18px;
+      margin:    16px auto 40px;
+      max-width: 480px;
+      position:  relative;
+      z-index:   1;
+    }
+
+    .hiw-cta-actions {
+      display:         flex;
+      gap:             16px;
+      justify-content: center;
+      flex-wrap:       wrap;
+      position:        relative;
+      z-index:         1;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .timeline::before  { left: 23px; }
+      .timeline-num      { width: 48px; height: 48px; font-size: 18px; }
+      .faq-strip-grid    { grid-template-columns: 1fr; }
+      .compare-table th,
+      .compare-table td  { padding: 12px 14px; font-size: 13px; }
+      .flow-header       { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .hiw-hero-tabs     { flex-direction: column; align-items: center; }
+      .hiw-cta-actions   { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo">Anvaye</a>
+
+      <div class="nav-links">
+        <a href="index.html#features">Features</a>
+        <a href="how-it-works.html"
+          style="color:var(--brand)">How it works</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="faq.html">FAQ</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="buyer/index.html"  class="nav-signin">Sign in</a>
+        <a href="index.html#join"   class="btn btn-primary btn-sm">
+          Get started
+        </a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="nav-mobile" id="navMobile">
+    <button class="nav-mobile-close" id="navMobileClose">✕</button>
+    <a href="index.html">Home</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="faq.html">FAQ</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="index.html#join" class="btn btn-primary">Get started</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <section class="hiw-hero">
+    <div class="container">
+      <div class="hiw-hero-inner">
+
+        <div class="section-tag" style="margin-bottom:16px">
+          How it works
+        </div>
+
+        <h1>Simple for<br />
+          <span class="glow-text">everyone</span>
+        </h1>
+
+        <p>
+          Whether you're buying your dream products or selling
+          your handmade creations — Anvaye makes it effortless.
+        </p>
+
+        <div class="hiw-hero-tabs">
+          <button
+            class="hiw-tab-btn active-buyer"
+            onclick="scrollToSection('buyerFlow')"
+          >
+            🛍️ For Buyers
+          </button>
+          <button
+            class="hiw-tab-btn active-seller"
+            onclick="scrollToSection('sellerFlow')"
+          >
+            🏪 For Sellers
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       BUYER FLOW
+  ═══════════════════════════════════════════ -->
+  <section class="flow-section flow-section-buyer" id="buyerFlow">
+    <div class="container">
+
+      <div class="flow-header reveal">
+        <div class="flow-header-icon flow-header-icon-buyer">🛍️</div>
+        <div>
+          <div class="flow-header-title">For Buyers</div>
+          <div class="flow-header-sub">
+            From sign up to delivery — here's exactly how it works
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline">
+
+        <div class="timeline-step reveal">
+          <div class="timeline-num tn-buyer">1</div>
+          <div class="timeline-content">
+            <div class="timeline-step-title">
+              Sign up with your phone number
+            </div>
+            <div class="timeline-step-desc">
+              No email, no password, no long forms.
+              Just enter your Indian mobile number and verify
+              with a one-time OTP. You're in within 30 seconds.
+            </div>
+            <div class="timeline-step-tip tip-buyer">
+              <i class="ti ti-shield-check"></i>
+              Secured with OTP verification
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-step reveal">
+          <div class="timeline-num tn-buyer">2</div>
+          <div class="timeline-content">
+            <div class="timeline-step-title">
+              Browse verified sellers
+            </div>
+            <div class="timeline-step-desc">
+              Discover unique Instagram sellers — from handmade crafts
+              to supplements, pottery to fashion.
+              Every seller is verified and reviewed by real buyers.
+              Free sellers are available immediately.
+              Subscribe to Anvaye Pass (₹50 / 15 days) to unlock all sellers.
+            </div>
+            <div class="timeline-step-tip tip-buyer">
+              <i class="ti ti-star"></i>
+              Only real buyers can leave reviews
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-step reveal">
+          <div class="timeline-num tn-buyer">3</div>
+          <div class="timeline-content">
+            <div class="timeline-step-title">
+              Browse products & add to cart
+            </div>
+            <div class="timeline-step-desc">
+              Explore each seller's full product catalogue.
+              View detailed descriptions, pricing, ratings,
+              and verified buyer reviews before you decide.
+            </div>
+            <div class="timeline-step-tip tip-buyer">
+              <i class="ti ti-eye"></i>
+              Full product details before you buy
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-step reveal">
+          <div class="timeline-num tn-buyer">4</div>
+          <div class="timeline-content">
+            <div class="timeline-step-title">
+              Pay directly via UPI
+            </div>
+            <div class="timeline-step-desc">
+              No middlemen. Payment goes straight to the seller's
+              UPI ID via Razorpay — India's most trusted payment gateway.
+              No holding periods, no delays. Instant and secure.
+            </div>
+            <div class="timeline-step-tip tip-buyer">
+              <i class="ti ti-lock"></i>
+              Secured by Razorpay
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-step reveal">
+          <div class="timeline-num tn-buyer">5</div>
+          <div class="timeline-content">
+            <div class="timeline-step-title">
+              Track your order in real-time
+            </div>
+            <div class="timeline-step-desc">
+              Follow your order from confirmation to delivery.
+              Get notified at every step —
+              confirmed, packing, shipped, and delivered.
+              No more wondering where your order is.
+            </div>
+            <div class="timeline-step-tip tip-buyer">
+              <i class="ti ti-map-pin"></i>
+              Real-time status updates
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-step reveal">
+          <div class="timeline-num tn-buyer">6</div>
+          <div class="timeline-content">
+            <div class="timeline-step-title">
+              Leave a verified review
+            </div>
+            <div class="timeline-step-desc">
+              After delivery, share your experience.
+              Only buyers who actually purchased can leave reviews —
+              so every rating you see is genuine and tamper-proof.
+              Your review helps other buyers make better decisions.
+            </div>
+            <div class="timeline-step-tip tip-buyer">
+              <i class="ti ti-certificate"></i>
+              Verified purchase reviews only
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align:center;margin-top:64px">
+        <a href="buyer/index.html" class="btn btn-primary btn-lg">
+          Start shopping now
+          <i class="ti ti-arrow-right"></i>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SELLER FLOW
+  ═══════════════════════════════════════════ -->
+  <section class="flow-section flow-section-seller" id="sellerFlow">
+    <div class="container">
+
+      <div class="flow-header reveal">
+        <div class="flow-header-icon flow-header-icon-seller">🏪</div>
+        <div>
+          <div class="flow-header-title">For Sellers</div>
+          <div class="flow-header-sub">
+            From sign up to your first sale — here's exactly how it works
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline timeline-seller">
+
+        <div class="timeline-step reveal">
+          <div class="timeline-num tn-seller">1</div>
+          <div class="timeline-content">
+            <div class="timeline-step-title">
+              Verify your phone number
+            </div>
+            <div class="timeline-step-desc">
+              Quick OTP verification with your Indian mobile number.
+              No lengthy KYC, no document uploads to get started.
+              You can be live in under 5 minutes.
+            </div>
+            <div class="timeline-step-tip tip-seller">
+              <i class="ti ti-bolt"></i>
+              Live in under 5 minutes
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-step reveal">
+          <div class="timeline-num tn-seller">2</div>
+          <div class="timeline-content">
+            <div class="timeline-step-title">
+              Connect your Instagram handle
+            </div>
+            <div class="timeline-step-desc">
+              Your Instagram username becomes your store identity on Anvaye.
+              Buyers who already follow you on Instagram can find
+              your Anvaye store directly — no need to rebuild your audience.
+            </div>
+            <div class="timeline-step-tip tip-seller">
+              <i class="ti ti-brand-instagram"></i>
+              Your existing audience finds you
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-step reveal">
+          <div class="timeline-num tn-seller">3</div>
+          <div class="timeline-content">
+            <div class="timeline-step-title">
+              List your products
+            </div>
+            <div class="timeline-step-desc">
+              Add products with photos, descriptions, and prices.
+              Takes less than 2 minutes per product.
+              No technical skills needed — if you can use Instagram,
+              you can list on Anvaye.
+            </div>
+            <div class="timeline-step-tip tip-seller">
+              <i class="ti ti-clock"></i>
+              2 minutes per product
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-step reveal">
+          <div class="timeline-num tn-seller">4</div>
+          <div class="timeline-content">
+            <div class="timeline-step-title">
+              Receive orders & get paid instantly
+            </div>
+            <div class="timeline-step-desc">
+              When a buyer places an order, payment goes directly
+              to your UPI ID via Razorpay.
+              Anvaye charges only 3% per successful sale —
+              no monthly fees, no listing fees, no hidden charges.
+              We only earn when you earn.
+            </div>
+            <div class="timeline-step-tip tip-seller">
+              <i class="ti ti-currency-rupee"></i>
+              Only 3% per sale — no monthly fees
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-step reveal">
+          <div class="timeline-num tn-seller">5</div>
+          <div class="timeline-content">
+            <div class="timeline-step-title">
+              Manage orders from your dashboard
+            </div>
+            <div class="timeline-step-desc">
+              View all incoming orders in your seller dashboard.
+              Update order status (Packing → Shipped → Delivered)
+              and keep buyers informed automatically.
+              See your revenue, ratings, and analytics at a glance.
+            </div>
+            <div class="timeline-step-tip tip-seller">
+              <i class="ti ti-layout-dashboard"></i>
+              All orders in one place
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-step reveal">
+          <div class="timeline-num tn-seller">6</div>
+          <div class="timeline-content">
+            <div class="timeline-step-title">
+              Build your reputation
+            </div>
+            <div class="timeline-step-desc">
+              After delivery, buyers can leave verified reviews.
+              Only real buyers who purchased can review —
+              so your rating is 100% genuine and tamper-proof.
+              A strong rating means more trust, more buyers,
+              and more sales.
+            </div>
+            <div class="timeline-step-tip tip-seller">
+              <i class="ti ti-star"></i>
+              Tamper-proof verified reviews
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align:center;margin-top:64px">
+        <a
+          href="seller/index.html"
+          class="btn btn-lg"
+          style="background:var(--green);color:#fff;
+                 box-shadow:0 8px 32px rgba(29,158,117,0.35)"
+        >
+          Start selling free
+          <i class="ti ti-arrow-right"></i>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       COMPARISON TABLE
+  ═══════════════════════════════════════════ -->
+  <section class="compare-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Anvaye vs others</div>
+        <h2 style="color:#fff">Why Anvaye wins</h2>
+        <div class="divider"></div>
+      </div>
+
+      <table class="compare-table reveal">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>🟠 Anvaye</th>
+            <th>Others</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Direct UPI payments to seller</td>
+            <td><span class="compare-yes">✓</span></td>
+            <td><span class="compare-no">✗</span></td>
+          </tr>
+          <tr>
+            <td>No monthly seller fees</td>
+            <td><span class="compare-yes">✓</span></td>
+            <td><span class="compare-no">✗</span></td>
+          </tr>
+          <tr>
+            <td>Only 3% commission per sale</td>
+            <td><span class="compare-yes">✓</span></td>
+            <td><span class="compare-no">✗</span></td>
+          </tr>
+          <tr>
+            <td>Verified buyer-only reviews</td>
+            <td><span class="compare-yes">✓</span></td>
+            <td><span class="compare-no">✗</span></td>
+          </tr>
+          <tr>
+            <td>Instagram seller integration</td>
+            <td><span class="compare-yes">✓</span></td>
+            <td><span class="compare-no">✗</span></td>
+          </tr>
+          <tr>
+            <td>Real-time order tracking</td>
+            <td><span class="compare-yes">✓</span></td>
+            <td><span class="compare-yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Mobile first design</td>
+            <td><span class="compare-yes">✓</span></td>
+            <td><span class="compare-yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Live in under 5 minutes</td>
+            <td><span class="compare-yes">✓</span></td>
+            <td><span class="compare-no">✗</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FAQ STRIP
+  ═══════════════════════════════════════════ -->
+  <section class="faq-strip">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Quick answers</div>
+        <h2>Common questions</h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="faq-strip-grid">
+
+        <div class="faq-item reveal">
+          <div class="faq-q">
+            <i class="ti ti-help-circle faq-q-icon"></i>
+            Is Anvaye free to use as a buyer?
+          </div>
+          <div class="faq-a">
+            Yes! Browsing and ordering from free sellers is completely free.
+            Subscribe to Anvaye Pass (₹50 / 15 days) to unlock all sellers
+            with no per-order fees.
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-1">
+          <div class="faq-q">
+            <i class="ti ti-help-circle faq-q-icon"></i>
+            How does Anvaye make money?
+          </div>
+          <div class="faq-a">
+            Anvaye charges sellers a flat 3% commission per successful sale.
+            Buyers can also subscribe to Anvaye Pass for ₹50 / 15 days.
+            No hidden fees anywhere.
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-2">
+          <div class="faq-q">
+            <i class="ti ti-help-circle faq-q-icon"></i>
+            Is my payment secure?
+          </div>
+          <div class="faq-a">
+            All payments are processed by Razorpay — India's most trusted
+            payment gateway. Your card and UPI details are never stored
+            on Anvaye servers.
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-3">
+          <div class="faq-q">
+            <i class="ti ti-help-circle faq-q-icon"></i>
+            What if I have a problem with my order?
+          </div>
+          <div class="faq-a">
+            Contact the seller directly through Anvaye's messaging system.
+            If unresolved, our support team steps in within 24 hours
+            to help mediate.
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <div class="faq-q">
+            <i class="ti ti-help-circle faq-q-icon"></i>
+            Can I sell on Anvaye without Instagram?
+          </div>
+          <div class="faq-a">
+            Currently Anvaye is designed for Instagram sellers.
+            Your Instagram handle is your store identity.
+            Support for other platforms is coming soon.
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-1">
+          <div class="faq-q">
+            <i class="ti ti-help-circle faq-q-icon"></i>
+            How quickly do I get paid as a seller?
+          </div>
+          <div class="faq-a">
+            Payments go directly to your UPI ID at the time of purchase.
+            There is no holding period — money is in your account
+            within minutes of the buyer paying.
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align:center;margin-top:40px">
+        <a href="faq.html" class="btn btn-secondary">
+          View all FAQs
+          <i class="ti ti-arrow-right"></i>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       CTA
+  ═══════════════════════════════════════════ -->
+  <section class="hiw-cta">
+    <div class="container">
+      <h2>Ready to get started?</h2>
+      <p>
+        Join thousands of buyers and sellers
+        already on Anvaye across India
+      </p>
+      <div class="hiw-cta-actions">
+        <a href="buyer/index.html" class="btn btn-primary btn-lg">
+          Start shopping
+          <i class="ti ti-arrow-right"></i>
+        </a>
+        <a
+          href="seller/index.html"
+          class="btn btn-lg"
+          style="background:var(--green);color:#fff;
+                 box-shadow:0 8px 32px rgba(29,158,117,0.35)"
+        >
+          Start selling
+          <i class="ti ti-arrow-right"></i>
+        </a>
+        <a href="index.html" class="btn btn-dark btn-lg">
+          Back to home
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <span class="nav-logo">Anvaye</span>
+          <p>One stop shop for your wish-list.
+             Connecting buyers with verified Instagram
+             sellers across India.</p>
+          <div class="footer-social">
+            <button class="social-btn" aria-label="Instagram">
+              <i class="ti ti-brand-instagram"></i>
+            </button>
+            <button class="social-btn" aria-label="Twitter">
+              <i class="ti ti-brand-twitter"></i>
+            </button>
+            <button class="social-btn" aria-label="WhatsApp">
+              <i class="ti ti-brand-whatsapp"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="buyer/index.html">For Buyers</a></li>
+            <li><a href="seller/index.html">For Sellers</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="how-it-works.html">How it works</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Seller Guide</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Refund Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span>
+          © <span class="current-year"></span>
+          Anvaye. All rights reserved.
+        </span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script>
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        const offset = el.offsetTop - 100;
+        window.scrollTo({ top: offset, behavior: 'smooth' });
+      }
+    }
+  </script>
+
+</body>
+</html>
