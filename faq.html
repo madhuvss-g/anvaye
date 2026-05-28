@@ -51,7 +51,6 @@
       margin:    0 auto 40px;
     }
 
-    /* Search bar */
     .faq-search-wrap {
       max-width:  480px;
       margin:     0 auto;
@@ -100,15 +99,14 @@
       align-items:           start;
     }
 
-    /* Sidebar */
     .faq-sidebar {
       position: sticky;
       top:      100px;
     }
 
     .faq-sidebar-title {
-      font-size:     11px;
-      font-weight:   700;
+      font-size:      11px;
+      font-weight:    700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color:          var(--text-secondary);
@@ -140,8 +138,8 @@
     }
 
     .faq-cat-btn.active {
-      background: var(--brand-dim);
-      color:      var(--brand);
+      background:  var(--brand-dim);
+      color:       var(--brand);
       font-weight: 600;
     }
 
@@ -154,7 +152,6 @@
       color:         var(--text-secondary);
     }
 
-    /* FAQ content */
     .faq-content { flex: 1; }
 
     .faq-category {
@@ -210,8 +207,8 @@
       gap:             16px;
     }
 
-    .accordion-btn:hover  { background: var(--bg-secondary); }
-    .accordion-btn.open   { color: var(--brand); }
+    .accordion-btn:hover { background: var(--bg-secondary); }
+    .accordion-btn.open  { color: var(--brand); }
 
     .accordion-icon {
       font-size:   20px;
@@ -226,17 +223,16 @@
     }
 
     .accordion-body {
-      display:    none;
-      padding:    0 20px 16px;
-      font-size:  14px;
-      color:      var(--text-secondary);
+      display:     none;
+      padding:     0 20px 16px;
+      font-size:   14px;
+      color:       var(--text-secondary);
       line-height: 1.7;
-      background: var(--bg-primary);
+      background:  var(--bg-primary);
     }
 
     .accordion-body.open { display: block; }
 
-    /* No results */
     .faq-no-results {
       text-align:  center;
       padding:     48px;
@@ -266,7 +262,8 @@
     }
 
     .faq-cta h2 { color: #fff; position: relative; z-index: 1; }
-    .faq-cta p  {
+
+    .faq-cta p {
       color:     rgba(255,255,255,0.55);
       font-size: 18px;
       margin:    16px auto 40px;
@@ -290,10 +287,10 @@
         grid-template-columns: 1fr;
       }
       .faq-sidebar {
-        position: static;
-        display:  flex;
+        position:  static;
+        display:   flex;
         flex-wrap: wrap;
-        gap:      8px;
+        gap:       8px;
       }
       .faq-sidebar-title { width: 100%; }
       .faq-cat-btn       { width: auto; }
@@ -319,7 +316,9 @@
       </div>
       <div class="nav-actions">
         <a href="buyer/index.html" class="nav-signin">Sign in</a>
-        <a href="index.html#join" class="btn btn-primary btn-sm">Get started</a>
+        <a href="index.html#join" class="btn btn-primary btn-sm">
+          Get started
+        </a>
       </div>
       <button class="nav-toggle" id="navToggle" aria-label="Open menu">
         <span></span><span></span><span></span>
@@ -376,31 +375,26 @@
             All questions
             <span class="faq-cat-count">24</span>
           </button>
-
           <button class="faq-cat-btn" data-cat="general">
             <i class="ti ti-info-circle"></i>
             General
             <span class="faq-cat-count">4</span>
           </button>
-
           <button class="faq-cat-btn" data-cat="buyers">
             <i class="ti ti-shopping-bag"></i>
             For Buyers
             <span class="faq-cat-count">7</span>
           </button>
-
           <button class="faq-cat-btn" data-cat="sellers">
             <i class="ti ti-store"></i>
             For Sellers
             <span class="faq-cat-count">7</span>
           </button>
-
           <button class="faq-cat-btn" data-cat="payments">
             <i class="ti ti-currency-rupee"></i>
             Payments
             <span class="faq-cat-count">4</span>
           </button>
-
           <button class="faq-cat-btn" data-cat="orders">
             <i class="ti ti-package"></i>
             Orders
@@ -419,7 +413,8 @@
               General
             </div>
 
-            <div class="accordion-item" data-question="what is anvaye">
+            <div class="accordion-item"
+              data-question="what is anvaye">
               <button class="accordion-btn" data-accordion>
                 What is Anvaye?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -434,19 +429,21 @@
               </div>
             </div>
 
-            <div class="accordion-item" data-question="is anvaye available across india">
+            <div class="accordion-item"
+              data-question="is anvaye available across india">
               <button class="accordion-btn" data-accordion>
                 Is Anvaye available across India?
                 <i class="ti ti-plus accordion-icon"></i>
               </button>
               <div class="accordion-body">
                 Yes! Anvaye is available across all of India.
-                Any buyer or seller with an Indian mobile number can sign up
-                and start using Anvaye immediately.
+                Any buyer or seller with an Indian mobile number
+                can sign up and start using Anvaye immediately.
               </div>
             </div>
 
-            <div class="accordion-item" data-question="what languages does anvaye support">
+            <div class="accordion-item"
+              data-question="what languages does anvaye support">
               <button class="accordion-btn" data-accordion>
                 What languages does Anvaye support?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -458,7 +455,8 @@
               </div>
             </div>
 
-            <div class="accordion-item" data-question="how do i contact anvaye support">
+            <div class="accordion-item"
+              data-question="how do i contact anvaye support">
               <button class="accordion-btn" data-accordion>
                 How do I contact Anvaye support?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -470,7 +468,6 @@
                 priority support with faster response times.
               </div>
             </div>
-
           </div>
 
           <!-- Buyers -->
@@ -481,19 +478,22 @@
               For Buyers
             </div>
 
-            <div class="accordion-item" data-question="how do i sign up as a buyer">
+            <div class="accordion-item"
+              data-question="how do i sign up as a buyer">
               <button class="accordion-btn" data-accordion>
                 How do I sign up as a buyer?
                 <i class="ti ti-plus accordion-icon"></i>
               </button>
               <div class="accordion-body">
-                Simply enter your Indian mobile number on the buyer sign-up page
-                and verify with a one-time OTP. No email, no password,
-                no long forms. You're in within 30 seconds.
+                Simply enter your Indian mobile number on the buyer
+                sign-up page and verify with a one-time OTP.
+                No email, no password, no long forms.
+                You're in within 30 seconds.
               </div>
             </div>
 
-            <div class="accordion-item" data-question="what is anvaye pass">
+            <div class="accordion-item"
+              data-question="what is anvaye pass">
               <button class="accordion-btn" data-accordion>
                 What is Anvaye Pass?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -507,7 +507,8 @@
               </div>
             </div>
 
-            <div class="accordion-item" data-question="can i order without anvaye pass">
+            <div class="accordion-item"
+              data-question="can i order without anvaye pass">
               <button class="accordion-btn" data-accordion>
                 Can I order without Anvaye Pass?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -519,7 +520,8 @@
               </div>
             </div>
 
-            <div class="accordion-item" data-question="how do i track my order">
+            <div class="accordion-item"
+              data-question="how do i track my order">
               <button class="accordion-btn" data-accordion>
                 How do I track my order?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -532,7 +534,8 @@
               </div>
             </div>
 
-            <div class="accordion-item" data-question="what if my order doesn't arrive">
+            <div class="accordion-item"
+              data-question="what if my order doesnt arrive">
               <button class="accordion-btn" data-accordion>
                 What if my order doesn't arrive?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -545,7 +548,8 @@
               </div>
             </div>
 
-            <div class="accordion-item" data-question="can i return a product">
+            <div class="accordion-item"
+              data-question="can i return a product">
               <button class="accordion-btn" data-accordion>
                 Can I return a product?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -558,7 +562,8 @@
               </div>
             </div>
 
-            <div class="accordion-item" data-question="how do i leave a review">
+            <div class="accordion-item"
+              data-question="how do i leave a review">
               <button class="accordion-btn" data-accordion>
                 How do I leave a review?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -570,7 +575,6 @@
                 are genuine and tamper-proof.
               </div>
             </div>
-
           </div>
 
           <!-- Sellers -->
@@ -581,20 +585,22 @@
               For Sellers
             </div>
 
-            <div class="accordion-item" data-question="how do i become a seller on anvaye">
+            <div class="accordion-item"
+              data-question="how do i become a seller on anvaye">
               <button class="accordion-btn" data-accordion>
                 How do I become a seller on Anvaye?
                 <i class="ti ti-plus accordion-icon"></i>
               </button>
               <div class="accordion-body">
-                Go to the seller sign-up page, verify your Indian mobile number
-                via OTP, connect your Instagram handle, add your store name
-                and description, then list your first product.
+                Go to the seller sign-up page, verify your Indian mobile
+                number via OTP, connect your Instagram handle, add your
+                store name and description, then list your first product.
                 The whole process takes under 5 minutes.
               </div>
             </div>
 
-            <div class="accordion-item" data-question="do i need an instagram account to sell">
+            <div class="accordion-item"
+              data-question="do i need instagram to sell">
               <button class="accordion-btn" data-accordion>
                 Do I need an Instagram account to sell?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -606,19 +612,21 @@
               </div>
             </div>
 
-            <div class="accordion-item" data-question="how much does it cost to sell on anvaye">
+            <div class="accordion-item"
+              data-question="how much does it cost to sell on anvaye">
               <button class="accordion-btn" data-accordion>
                 How much does it cost to sell on Anvaye?
                 <i class="ti ti-plus accordion-icon"></i>
               </button>
               <div class="accordion-body">
                 Listing products is completely free. Anvaye charges only 3%
-                per successful sale. There are no monthly fees, no listing fees,
-                and no setup costs. If you don't sell, you pay nothing.
+                per successful sale. There are no monthly fees, no listing
+                fees, and no setup costs. If you don't sell, you pay nothing.
               </div>
             </div>
 
-            <div class="accordion-item" data-question="how do i receive payments">
+            <div class="accordion-item"
+              data-question="how do i receive payments as seller">
               <button class="accordion-btn" data-accordion>
                 How do I receive payments?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -630,7 +638,8 @@
               </div>
             </div>
 
-            <div class="accordion-item" data-question="how many products can i list">
+            <div class="accordion-item"
+              data-question="how many products can i list">
               <button class="accordion-btn" data-accordion>
                 How many products can I list?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -641,7 +650,8 @@
               </div>
             </div>
 
-            <div class="accordion-item" data-question="how do i manage my orders">
+            <div class="accordion-item"
+              data-question="how do i manage my orders as seller">
               <button class="accordion-btn" data-accordion>
                 How do I manage my orders?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -654,7 +664,8 @@
               </div>
             </div>
 
-            <div class="accordion-item" data-question="can i be both a buyer and seller">
+            <div class="accordion-item"
+              data-question="can i be both buyer and seller">
               <button class="accordion-btn" data-accordion>
                 Can I be both a buyer and a seller?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -665,7 +676,6 @@
                 Switch between buyer and seller modes from your profile.
               </div>
             </div>
-
           </div>
 
           <!-- Payments -->
@@ -676,7 +686,8 @@
               Payments
             </div>
 
-            <div class="accordion-item" data-question="is my payment secure on anvaye">
+            <div class="accordion-item"
+              data-question="is my payment secure on anvaye">
               <button class="accordion-btn" data-accordion>
                 Is my payment secure on Anvaye?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -689,7 +700,8 @@
               </div>
             </div>
 
-            <div class="accordion-item" data-question="what payment methods are accepted">
+            <div class="accordion-item"
+              data-question="what payment methods are accepted">
               <button class="accordion-btn" data-accordion>
                 What payment methods are accepted?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -701,7 +713,8 @@
               </div>
             </div>
 
-            <div class="accordion-item" data-question="can i get a refund">
+            <div class="accordion-item"
+              data-question="can i get a refund">
               <button class="accordion-btn" data-accordion>
                 Can I get a refund?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -714,7 +727,8 @@
               </div>
             </div>
 
-            <div class="accordion-item" data-question="does anvaye hold payments">
+            <div class="accordion-item"
+              data-question="does anvaye hold payments">
               <button class="accordion-btn" data-accordion>
                 Does Anvaye hold payments before releasing to sellers?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -726,7 +740,6 @@
                 key differentiators.
               </div>
             </div>
-
           </div>
 
           <!-- Orders -->
@@ -737,7 +750,8 @@
               Orders
             </div>
 
-            <div class="accordion-item" data-question="how long does delivery take">
+            <div class="accordion-item"
+              data-question="how long does delivery take">
               <button class="accordion-btn" data-accordion>
                 How long does delivery take?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -750,7 +764,8 @@
               </div>
             </div>
 
-            <div class="accordion-item" data-question="can i cancel my order">
+            <div class="accordion-item"
+              data-question="can i cancel my order">
               <button class="accordion-btn" data-accordion>
                 Can I cancel my order?
                 <i class="ti ti-plus accordion-icon"></i>
@@ -800,6 +815,7 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
+
         <div class="footer-brand">
           <span class="nav-logo">Anvaye</span>
           <p>One stop shop for your wish-list.
@@ -817,6 +833,7 @@
             </button>
           </div>
         </div>
+
         <div class="footer-col">
           <h4>Platform</h4>
           <ul>
@@ -826,6 +843,7 @@
             <li><a href="how-it-works.html">How it works</a></li>
           </ul>
         </div>
+
         <div class="footer-col">
           <h4>Resources</h4>
           <ul>
@@ -835,6 +853,7 @@
             <li><a href="#">Seller Guide</a></li>
           </ul>
         </div>
+
         <div class="footer-col">
           <h4>Legal</h4>
           <ul>
@@ -844,15 +863,21 @@
             <li><a href="#">Cookie Policy</a></li>
           </ul>
         </div>
+
       </div>
+
       <div class="footer-bottom">
-        <span>© <span class="current-year"></span> Anvaye. All rights reserved.</span>
+        <span>
+          © <span class="current-year"></span>
+          Anvaye. All rights reserved.
+        </span>
         <div class="footer-bottom-links">
           <a href="#">Privacy</a>
           <a href="#">Terms</a>
           <a href="#">Sitemap</a>
         </div>
       </div>
+
     </div>
   </footer>
 
@@ -864,6 +889,7 @@
         const body   = btn.nextElementSibling;
         const isOpen = body.classList.contains('open');
 
+        /* Close all */
         document.querySelectorAll('.accordion-body').forEach(b => {
           b.classList.remove('open');
         });
@@ -871,6 +897,7 @@
           b.classList.remove('open');
         });
 
+        /* Open clicked if it was closed */
         if (!isOpen) {
           body.classList.add('open');
           btn.classList.add('open');
@@ -881,12 +908,14 @@
     /* ── CATEGORY FILTER ── */
     document.querySelectorAll('.faq-cat-btn').forEach(btn => {
       btn.addEventListener('click', () => {
+        /* Update active state */
         document.querySelectorAll('.faq-cat-btn')
           .forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
         const cat = btn.getAttribute('data-cat');
 
+        /* Show/hide categories */
         document.querySelectorAll('.faq-category').forEach(cat_el => {
           if (cat === 'all' ||
               cat_el.getAttribute('data-category') === cat) {
@@ -926,13 +955,13 @@
           cat.style.display = visibleItems.length > 0 ? 'block' : 'none';
         });
 
-        /* No results */
+        /* No results state */
         const noResults = document.getElementById('faqNoResults');
         if (noResults) {
           noResults.style.display = visibleCount === 0 ? 'block' : 'none';
         }
 
-        /* Reset category sidebar */
+        /* Reset category sidebar to all */
         document.querySelectorAll('.faq-cat-btn')
           .forEach(b => b.classList.remove('active'));
         document.querySelector('[data-cat="all"]')
