@@ -1,0 +1,720 @@
+    }
+
+    .accordion-body {
+      display:    none;
+      padding:    0 20px 16px;
+      font-size:  14px;
+      color:      var(--text-secondary);
+      line-height: 1.7;
+      background: var(--bg-primary);
+    }
+
+    .accordion-body.open { display: block; }
+
+    /* No results */
+    .faq-no-results {
+      text-align:  center;
+      padding:     48px;
+      color:       var(--text-secondary);
+      font-size:   15px;
+      display:     none;
+    }
+
+    /* ── CTA ── */
+    .faq-cta {
+      background:  var(--bg-dark);
+      padding:     100px 0;
+      text-align:  center;
+      position:    relative;
+      overflow:    hidden;
+    }
+
+    .faq-cta::before {
+      content:   '';
+      position:  absolute;
+      inset:     0;
+      background: radial-gradient(
+        ellipse at 50% 50%,
+        rgba(255,92,43,0.15) 0%,
+        transparent 70%
+      );
+    }
+
+    .faq-cta h2 { color: #fff; position: relative; z-index: 1; }
+    .faq-cta p  {
+      color:     rgba(255,255,255,0.55);
+      font-size: 18px;
+      margin:    16px auto 40px;
+      max-width: 480px;
+      position:  relative;
+      z-index:   1;
+    }
+
+    .faq-cta-actions {
+      display:         flex;
+      gap:             16px;
+      justify-content: center;
+      flex-wrap:       wrap;
+      position:        relative;
+      z-index:         1;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .faq-layout {
+        grid-template-columns: 1fr;
+      }
+      .faq-sidebar {
+        position: static;
+        display:  flex;
+        flex-wrap: wrap;
+        gap:      8px;
+      }
+      .faq-sidebar-title { width: 100%; }
+      .faq-cat-btn       { width: auto; }
+    }
+
+    @media (max-width: 480px) {
+      .faq-cta-actions { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo">Anvaye</a>
+      <div class="nav-links">
+        <a href="index.html#features">Features</a>
+        <a href="how-it-works.html">How it works</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="faq.html" style="color:var(--brand)">FAQ</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a href="buyer/index.html" class="nav-signin">Sign in</a>
+        <a href="index.html#join" class="btn btn-primary btn-sm">Get started</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="nav-mobile" id="navMobile">
+    <button class="nav-mobile-close" id="navMobileClose">✕</button>
+    <a href="index.html">Home</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="faq.html">FAQ</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="index.html#join" class="btn btn-primary">Get started</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="faq-hero">
+    <div class="container">
+      <div class="faq-hero-inner">
+        <div class="section-tag" style="margin-bottom:16px">FAQ</div>
+        <h1>Got questions?<br />
+          <span class="glow-text">We have answers</span>
+        </h1>
+        <p>Everything you need to know about
+           Anvaye — for buyers and sellers.</p>
+        <div class="faq-search-wrap">
+          <i class="ti ti-search"></i>
+          <input
+            class="faq-search"
+            type="text"
+            id="faqSearch"
+            placeholder="Search questions..."
+            aria-label="Search FAQ"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ CONTENT -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="faq-layout">
+
+        <!-- Sidebar -->
+        <div class="faq-sidebar">
+          <div class="faq-sidebar-title">Categories</div>
+
+          <button class="faq-cat-btn active" data-cat="all">
+            <i class="ti ti-list"></i>
+            All questions
+            <span class="faq-cat-count">24</span>
+          </button>
+
+          <button class="faq-cat-btn" data-cat="general">
+            <i class="ti ti-info-circle"></i>
+            General
+            <span class="faq-cat-count">4</span>
+          </button>
+
+          <button class="faq-cat-btn" data-cat="buyers">
+            <i class="ti ti-shopping-bag"></i>
+            For Buyers
+            <span class="faq-cat-count">7</span>
+          </button>
+
+          <button class="faq-cat-btn" data-cat="sellers">
+            <i class="ti ti-store"></i>
+            For Sellers
+            <span class="faq-cat-count">7</span>
+          </button>
+
+          <button class="faq-cat-btn" data-cat="payments">
+            <i class="ti ti-currency-rupee"></i>
+            Payments
+            <span class="faq-cat-count">4</span>
+          </button>
+
+          <button class="faq-cat-btn" data-cat="orders">
+            <i class="ti ti-package"></i>
+            Orders
+            <span class="faq-cat-count">2</span>
+          </button>
+        </div>
+
+        <!-- FAQ Content -->
+        <div class="faq-content" id="faqContent">
+
+          <!-- General -->
+          <div class="faq-category" data-category="general">
+            <div class="faq-category-title">
+              <div class="faq-category-icon"
+                style="background:var(--brand-dim)">ℹ️</div>
+              General
+            </div>
+
+            <div class="accordion-item" data-question="what is anvaye">
+              <button class="accordion-btn" data-accordion>
+                What is Anvaye?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Anvaye is an Indian e-commerce platform that connects buyers
+                with verified Instagram sellers. Buyers can discover unique
+                handmade and curated products, while sellers can list their
+                products and receive payments directly via UPI.
+                Think of it as a trusted marketplace built specifically
+                for Instagram sellers and their customers.
+              </div>
+            </div>
+
+            <div class="accordion-item" data-question="is anvaye available across india">
+              <button class="accordion-btn" data-accordion>
+                Is Anvaye available across India?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Yes! Anvaye is available across all of India.
+                Any buyer or seller with an Indian mobile number can sign up
+                and start using Anvaye immediately.
+              </div>
+            </div>
+
+            <div class="accordion-item" data-question="what languages does anvaye support">
+              <button class="accordion-btn" data-accordion>
+                What languages does Anvaye support?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Currently Anvaye is available in English.
+                Support for Hindi and other regional Indian languages
+                is on our roadmap and coming soon.
+              </div>
+            </div>
+
+            <div class="accordion-item" data-question="how do i contact anvaye support">
+              <button class="accordion-btn" data-accordion>
+                How do I contact Anvaye support?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                You can reach us at anvaye-in@slkjijhk.com.
+                We respond within 24 hours on all days.
+                For urgent issues, Anvaye Pass subscribers get
+                priority support with faster response times.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Buyers -->
+          <div class="faq-category" data-category="buyers">
+            <div class="faq-category-title">
+              <div class="faq-category-icon"
+                style="background:var(--brand-dim)">🛍️</div>
+              For Buyers
+            </div>
+
+            <div class="accordion-item" data-question="how do i sign up as a buyer">
+              <button class="accordion-btn" data-accordion>
+                How do I sign up as a buyer?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Simply enter your Indian mobile number on the buyer sign-up page
+                and verify with a one-time OTP. No email, no password,
+                no long forms. You're in within 30 seconds.
+              </div>
+            </div>
+
+            <div class="accordion-item" data-question="what is anvaye pass">
+              <button class="accordion-btn" data-accordion>
+                What is Anvaye Pass?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Anvaye Pass is a subscription for buyers at ₹50 for 15 days.
+                It unlocks access to all sellers on Anvaye, removes per-order
+                platform fees, and gives you priority customer support.
+                Without a pass, you can still browse and order from
+                free sellers at no cost.
+              </div>
+            </div>
+
+            <div class="accordion-item" data-question="can i order without anvaye pass">
+              <button class="accordion-btn" data-accordion>
+                Can I order without Anvaye Pass?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Yes! A selection of sellers is available for free browsing
+                and ordering without any subscription.
+                Anvaye Pass simply unlocks the full catalogue of all sellers.
+              </div>
+            </div>
+
+            <div class="accordion-item" data-question="how do i track my order">
+              <button class="accordion-btn" data-accordion>
+                How do I track my order?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                After placing an order, go to your Orders section and
+                click "Track order". You'll see real-time status updates —
+                Confirmed, Packing, Shipped, and Delivered.
+                You'll also receive notifications at each stage.
+              </div>
+            </div>
+
+            <div class="accordion-item" data-question="what if my order doesn't arrive">
+              <button class="accordion-btn" data-accordion>
+                What if my order doesn't arrive?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                First, contact the seller directly through Anvaye's
+                messaging system. If the issue is not resolved within
+                48 hours, contact our support team at anvaye-in@slkjijhk.com
+                and we will mediate on your behalf.
+              </div>
+            </div>
+
+            <div class="accordion-item" data-question="can i return a product">
+              <button class="accordion-btn" data-accordion>
+                Can I return a product?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Returns are subject to each seller's individual return policy,
+                which is displayed on their store page.
+                Anvaye encourages all sellers to have fair return policies.
+                Contact the seller directly to initiate a return.
+              </div>
+            </div>
+
+            <div class="accordion-item" data-question="how do i leave a review">
+              <button class="accordion-btn" data-accordion>
+                How do I leave a review?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                After your order is marked as Delivered, you'll receive
+                a prompt to leave a review. Only buyers who actually
+                purchased can leave reviews — ensuring all ratings
+                are genuine and tamper-proof.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Sellers -->
+          <div class="faq-category" data-category="sellers">
+            <div class="faq-category-title">
+              <div class="faq-category-icon"
+                style="background:var(--green-dim)">🏪</div>
+              For Sellers
+            </div>
+
+            <div class="accordion-item" data-question="how do i become a seller on anvaye">
+              <button class="accordion-btn" data-accordion>
+                How do I become a seller on Anvaye?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Go to the seller sign-up page, verify your Indian mobile number
+                via OTP, connect your Instagram handle, add your store name
+                and description, then list your first product.
+                The whole process takes under 5 minutes.
+              </div>
+            </div>
+
+            <div class="accordion-item" data-question="do i need an instagram account to sell">
+              <button class="accordion-btn" data-accordion>
+                Do I need an Instagram account to sell?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Yes. Currently Anvaye is designed for Instagram sellers.
+                Your Instagram handle is your store identity on Anvaye.
+                Support for sellers without Instagram is on our roadmap.
+              </div>
+            </div>
+
+            <div class="accordion-item" data-question="how much does it cost to sell on anvaye">
+              <button class="accordion-btn" data-accordion>
+                How much does it cost to sell on Anvaye?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Listing products is completely free. Anvaye charges only 3%
+                per successful sale. There are no monthly fees, no listing fees,
+                and no setup costs. If you don't sell, you pay nothing.
+              </div>
+            </div>
+
+            <div class="accordion-item" data-question="how do i receive payments">
+              <button class="accordion-btn" data-accordion>
+                How do I receive payments?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Payments go directly to your UPI ID at the time of purchase
+                via Razorpay. There is no holding period.
+                Money is in your account within minutes of the buyer paying.
+              </div>
+            </div>
+
+            <div class="accordion-item" data-question="how many products can i list">
+              <button class="accordion-btn" data-accordion>
+                How many products can I list?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                There is no limit on the number of products you can list.
+                Add as many products as you want — completely free.
+              </div>
+            </div>
+
+            <div class="accordion-item" data-question="how do i manage my orders">
+              <button class="accordion-btn" data-accordion>
+                How do I manage my orders?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Your seller dashboard shows all incoming orders in real-time.
+                You can update order status (Packing → Shipped → Delivered),
+                view revenue analytics, and manage your product catalogue
+                all from one place.
+              </div>
+            </div>
+
+            <div class="accordion-item" data-question="can i be both a buyer and seller">
+              <button class="accordion-btn" data-accordion>
+                Can I be both a buyer and a seller?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Yes! You can use Anvaye as both a buyer and a seller.
+                Simply sign up for both roles using the same mobile number.
+                Switch between buyer and seller modes from your profile.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Payments -->
+          <div class="faq-category" data-category="payments">
+            <div class="faq-category-title">
+              <div class="faq-category-icon"
+                style="background:var(--amber-dim)">💸</div>
+              Payments
+            </div>
+
+            <div class="accordion-item" data-question="is my payment secure on anvaye">
+              <button class="accordion-btn" data-accordion>
+                Is my payment secure on Anvaye?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                All payments are processed by Razorpay — India's most trusted
+                payment gateway used by millions of businesses.
+                Your card and UPI details are never stored on Anvaye's servers.
+                All transactions are encrypted and PCI DSS compliant.
+              </div>
+            </div>
+
+            <div class="accordion-item" data-question="what payment methods are accepted">
+              <button class="accordion-btn" data-accordion>
+                What payment methods are accepted?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Anvaye supports UPI (GPay, PhonePe, Paytm, BHIM),
+                debit cards, credit cards, and net banking.
+                UPI is the recommended and fastest payment method.
+              </div>
+            </div>
+
+            <div class="accordion-item" data-question="can i get a refund">
+              <button class="accordion-btn" data-accordion>
+                Can I get a refund?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Refunds are handled on a case-by-case basis depending on
+                the seller's return policy. If you have a genuine issue
+                with your order, contact our support team and we will
+                work to resolve it fairly for both parties.
+              </div>
+            </div>
+
+            <div class="accordion-item" data-question="does anvaye hold payments">
+              <button class="accordion-btn" data-accordion>
+                Does Anvaye hold payments before releasing to sellers?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                No. Unlike most platforms, Anvaye does not hold payments.
+                Money goes directly from the buyer to the seller's UPI ID
+                at the time of purchase. This is one of Anvaye's
+                key differentiators.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Orders -->
+          <div class="faq-category" data-category="orders">
+            <div class="faq-category-title">
+              <div class="faq-category-icon"
+                style="background:var(--blue-dim)">📦</div>
+              Orders
+            </div>
+
+            <div class="accordion-item" data-question="how long does delivery take">
+              <button class="accordion-btn" data-accordion>
+                How long does delivery take?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                Delivery times vary by seller and product.
+                Each seller specifies their shipping timeline on their
+                product pages. Typical delivery is 3–7 business days
+                for most sellers across India.
+              </div>
+            </div>
+
+            <div class="accordion-item" data-question="can i cancel my order">
+              <button class="accordion-btn" data-accordion>
+                Can I cancel my order?
+                <i class="ti ti-plus accordion-icon"></i>
+              </button>
+              <div class="accordion-body">
+                You can request a cancellation before the seller marks
+                the order as Shipped. Contact the seller directly through
+                Anvaye's messaging system. Once shipped, cancellation
+                is subject to the seller's return policy.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- No results -->
+          <div class="faq-no-results" id="faqNoResults">
+            No questions found matching your search.
+            <br /><br />
+            <a href="index.html#contact" class="btn btn-secondary btn-sm">
+              Ask us directly
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="faq-cta">
+    <div class="container">
+      <h2>Still have questions?</h2>
+      <p>Our support team is here to help within 24 hours</p>
+      <div class="faq-cta-actions">
+        <a href="index.html#contact" class="btn btn-primary btn-lg">
+          Contact us
+          <i class="ti ti-arrow-right"></i>
+        </a>
+        <a href="index.html#join" class="btn btn-dark btn-lg">
+          Get started
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="nav-logo">Anvaye</span>
+          <p>One stop shop for your wish-list.
+             Connecting buyers with verified Instagram
+             sellers across India.</p>
+          <div class="footer-social">
+            <button class="social-btn" aria-label="Instagram">
+              <i class="ti ti-brand-instagram"></i>
+            </button>
+            <button class="social-btn" aria-label="Twitter">
+              <i class="ti ti-brand-twitter"></i>
+            </button>
+            <button class="social-btn" aria-label="WhatsApp">
+              <i class="ti ti-brand-whatsapp"></i>
+            </button>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="buyer/index.html">For Buyers</a></li>
+            <li><a href="seller/index.html">For Sellers</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="how-it-works.html">How it works</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Seller Guide</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Refund Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span class="current-year"></span> Anvaye. All rights reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    /* ── ACCORDION ── */
+    document.querySelectorAll('[data-accordion]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const body   = btn.nextElementSibling;
+        const isOpen = body.classList.contains('open');
+
+        document.querySelectorAll('.accordion-body').forEach(b => {
+          b.classList.remove('open');
+        });
+        document.querySelectorAll('.accordion-btn').forEach(b => {
+          b.classList.remove('open');
+        });
+
+        if (!isOpen) {
+          body.classList.add('open');
+          btn.classList.add('open');
+        }
+      });
+    });
+
+    /* ── CATEGORY FILTER ── */
+    document.querySelectorAll('.faq-cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.faq-cat-btn')
+          .forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const cat = btn.getAttribute('data-cat');
+
+        document.querySelectorAll('.faq-category').forEach(cat_el => {
+          if (cat === 'all' ||
+              cat_el.getAttribute('data-category') === cat) {
+            cat_el.style.display = 'block';
+          } else {
+            cat_el.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    /* ── SEARCH ── */
+    document.getElementById('faqSearch')
+      ?.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        document.querySelectorAll('.accordion-item').forEach(item => {
+          const question = item.getAttribute('data-question') || '';
+          const answer   = item.querySelector('.accordion-body')
+                              ?.textContent.toLowerCase() || '';
+
+          if (!query ||
+              question.includes(query) ||
+              answer.includes(query)) {
+            item.style.display = 'block';
+            visibleCount++;
+          } else {
+            item.style.display = 'none';
+          }
+        });
+
+        /* Show/hide categories based on visible items */
+        document.querySelectorAll('.faq-category').forEach(cat => {
+          const visibleItems = [...cat.querySelectorAll('.accordion-item')]
+            .filter(i => i.style.display !== 'none');
+          cat.style.display = visibleItems.length > 0 ? 'block' : 'none';
+        });
+
+        /* No results */
+        const noResults = document.getElementById('faqNoResults');
+        if (noResults) {
+          noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        /* Reset category sidebar */
+        document.querySelectorAll('.faq-cat-btn')
+          .forEach(b => b.classList.remove('active'));
+        document.querySelector('[data-cat="all"]')
+          ?.classList.add('active');
+      });
+  </script>
+
+</body>
+</html>
+
