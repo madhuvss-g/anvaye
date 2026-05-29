@@ -1398,7 +1398,54 @@
       }
     }
 
-    /* ── OVERRIDE PHONE FORM ── */
+    /* ── SELLER PHONE FORM ── */
+    document.getElementById('sellerPhoneForm')
+      ?.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const phoneInput = document.getElementById('sellerPhoneInput');
+        const phone      = phoneInput?.value.trim();
+        const phoneRegex = /^[6-9]\d{9}$/;
+    
+        if (!phone || !phoneRegex.test(phone)) {
+          phoneInput.style.borderColor = '#D85A30';
+          showToast('Please enter a valid 10-digit Indian mobile number', 'error');
+          return;
+        }
+    
+        phoneInput.style.borderColor = '';
+    
+        const otpSubText = document.getElementById('sellerOtpSubText');
+        if (otpSubText) {
+          otpSubText.textContent = 'Sent to +91 ' + phone;
+        }
+
+        document.querySelectorAll('.seller-otp-input').forEach(inp => {
+          inp.value = '';
+        });
+
+        startSellerResendTimer('sellerResendBtn', 'sellerResendTimer', 30);
+    
+        showToast('OTP sent to +91 ' + phone);
+        showPage('otpPage');
+    
+        setTimeout(() => {
+          document.querySelector('.seller-otp-input')?.focus();
+        }, 350);
+      });
+    
+    /* ── SELLER RESEND BUTTON ── */
+    document.getElementById('sellerResendBtn')
+      ?.addEventListener('click', () => {
+        document.querySelectorAll('.seller-otp-input').forEach(inp => {
+          inp.value = '';
+        });
+        showToast('OTP resent successfully!');
+        startSellerResendTimer('sellerResendBtn', 'sellerResendTimer', 30);
+        document.querySelector('.seller-otp-input')?.focus();
+      });
+
+    /* ── SELLER OTP FORM ── */
     document.getElementById('sellerOtpForm')
       ?.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -1431,21 +1478,6 @@
         }, 800);
       });
 
-    /* ── OVERRIDE OTP FORM ── */
-    document.getElementById('sellerOtpForm')
-      ?.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const inputs = document.querySelectorAll('.seller-otp-input');
-        const otp    = [...inputs].map(i => i.value).join('');
-        if (otp.length < 4) return;
-
-        const store = localStorage.getItem('anvaye_store');
-        if (store) {
-          showPage('dashboardPage');
-        } else {
-          showPage('onboardingPage');
-        }
-      });
 
     /* ── OVERRIDE ONBOARDING FORM ── */
     document.getElementById('onboardingForm')
