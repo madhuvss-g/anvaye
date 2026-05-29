@@ -244,21 +244,23 @@
     let seconds = 10;
     const countdownEl = document.getElementById('countdown');
 
-    /* Check if this is a valid internal page navigation
-       and redirect immediately instead of showing 404 */
     const currentPath = window.location.pathname;
-    const base        = window.location.origin;
+    const origin      = window.location.origin;
+
+    // Detect GitHub Pages subfolder
+    const isGitHub = window.location.hostname.includes('github.io');
+    const base     = isGitHub ? '/anvaye-website' : '';
 
     if (currentPath.includes('/buyer')) {
-      window.location.replace(base + '/buyer/index.html');
+      window.location.replace(origin + base + '/buyer/index.html');
     } else if (currentPath.includes('/seller')) {
-      window.location.replace(base + '/seller/index.html');
+      window.location.replace(origin + base + '/seller/index.html');
     } else if (currentPath.includes('/how-it-works')) {
-      window.location.replace(base + '/how-it-works.html');
+      window.location.replace(origin + base + '/how-it-works.html');
     } else if (currentPath.includes('/pricing')) {
-      window.location.replace(base + '/pricing.html');
+      window.location.replace(origin + base + '/pricing.html');
     } else if (currentPath.includes('/faq')) {
-      window.location.replace(base + '/faq.html');
+      window.location.replace(origin + base + '/faq.html');
     } else {
       /* Unknown path — show countdown and redirect to home */
       const timer = setInterval(() => {
@@ -266,7 +268,7 @@
         if (countdownEl) countdownEl.textContent = seconds;
         if (seconds <= 0) {
           clearInterval(timer);
-          window.location.href = base + '/index.html';
+          window.location.href = origin + base + '/index.html';
         }
       }, 1000);
     }
