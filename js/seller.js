@@ -78,15 +78,6 @@ function startSellerResendTimer(
   }, 1000);
 }
 
-if (document.getElementById('sellerResendBtn')) {
-  startSellerResendTimer();
-}
-
-document.getElementById('sellerResendBtn')
-  ?.addEventListener('click', () => {
-    showToast('OTP resent successfully!');
-    startSellerResendTimer();
-  });
 
 /* ── FIELD ERROR ── */
 function showSellerFieldError(input, message) {
