@@ -1338,87 +1338,159 @@
   </div>
 
   <!-- Scripts -->
-  <script src="../js/main.js"></script>
-  <script src="../js/buyer.js"></script>
-  <script>
-    /* ── PAGE SWITCHER ── */
-    // All pages in buyer flow
-    const buyerPages = [
-      'phonePage',
-      'otpPage',
-      'homePage',
-      'storePage',
-      'productPage',
-      'subPage',
-      'confirmedPage',
-      'trackingPage'
-    ];
+<script src="../js/main.js"></script>
+<script src="../js/buyer.js"></script>
+<script>
+  /* ── PAGE SWITCHER ── */
+  const buyerPages = [
+    'phonePage',
+    'otpPage',
+    'homePage',
+    'storePage',
+    'productPage',
+    'subPage',
+    'confirmedPage',
+    'trackingPage'
+  ];
 
-    function showPage(pageId) {
-      // Hide all pages
-      buyerPages.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.display = 'none';
+  function showPage(pageId) {
+    buyerPages.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+
+    const target = document.getElementById(pageId);
+    if (target) {
+      target.style.display    = 'block';
+      target.style.opacity    = '0';
+      target.style.transform  = 'translateY(12px)';
+      target.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+      requestAnimationFrame(() => {
+        target.style.opacity   = '1';
+        target.style.transform = 'translateY(0)';
       });
-
-      // Show target page
-      const target = document.getElementById(pageId);
-      if (target) {
-        target.style.display = 'block';
-        // Animate in
-        target.style.opacity   = '0';
-        target.style.transform = 'translateY(12px)';
-        target.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-        requestAnimationFrame(() => {
-          target.style.opacity   = '1';
-          target.style.transform = 'translateY(0)';
-        });
-        // Scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+  }
 
-    /* ── OVERRIDE PHONE FORM ── */
-    // Show OTP page after phone submit
-    document.getElementById('phoneForm')
-      ?.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const phone = document.getElementById('phoneInput')?.value.trim();
-        const phoneRegex = /^[6-9]\d{9}$/;
-        if (!phoneRegex.test(phone)) return;
+  /* ── PHONE FORM ── */
+  document.getElementById('phoneForm')
+    ?.addEventListener('submit', (e) => {
+      e.preventDefault();
 
-        // Update OTP sub text
-        document.getElementById('otpSubText').textContent =
-          'Sent to +91 ' + phone;
+      const phoneInput = document.getElementById('phoneInput');
+      const phone      = phoneInput?.value.trim();
+      const phoneRegex = /^[6-9]\d{9}$/;
 
-        showToast('OTP sent to +91 ' + phone);
-        showPage('otpPage');
+      // ✅ Validate first — show error if invalid
+      if (!phone || !phoneRegex.test(phone)) {
+        phoneInput.style.borderColor = '#D85A30';
+        showToast('Please enter a valid 10-digit Indian mobile number', 'error');
+        return;
+      }
+
+      // Reset border
+      phoneInput.style.borderColor = '';
+
+      // Update OTP sub text
+      const otpSubText = document.getElementById('otpSubText');
+      if (otpSubText) {
+        otpSubText.textContent = 'Sent to +91 ' + phone;
+      }
+
+      showToast('OTP sent to +91 ' + phone);
+
+      // ✅ Clear any previous OTP inputs before showing page
+      document.querySelectorAll('.otp-input').forEach(inp => {
+        inp.value = '';
       });
 
-    /* ── OVERRIDE OTP FORM ── */
-    // Show home page after OTP verify
-    document.getElementById('otpForm')
-      ?.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const inputs = document.querySelectorAll('.otp-input');
-        const otp    = [...inputs].map(i => i.value).join('');
-        if (otp.length < 4) return;
+      // ✅ Reset and restart resend timer
+      startResendTimer('resendBtn', 'resendTimer', 30);
+
+      showPage('otpPage');
+
+      // ✅ Focus first OTP input after page shows
+      setTimeout(() => {
+        document.querySelector('.otp-input')?.focus();
+      }, 350);
+    });
+
+  /* ── OTP FORM ── */
+  document.getElementById('otpForm')
+    ?.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const inputs = document.querySelectorAll('.otp-input');
+      const otp    = [...inputs].map(i => i.value).join('');
+
+      // ✅ Strict check — must be exactly 4 digits
+      if (otp.length < 4 || !/^\d{4}$/.test(otp)) {
+        showToast('Please enter the 4-digit OTP', 'error');
+        // Shake animation on inputs
+        inputs.forEach(inp => {
+          inp.style.borderColor = '#D85A30';
+          setTimeout(() => {
+            inp.style.borderColor = '';
+          }, 1500);
+        });
+        return;
+      }
+
+      // ✅ Show loading state
+      const btn = e.target.querySelector('button[type="submit"]');
+      const originalText = btn.innerHTML;
+      btn.innerHTML  = 'Verifying...';
+      btn.disabled   = true;
+
+      // Simulate verification delay
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled  = false;
         showPage('homePage');
+      }, 800);
+    });
+
+  /* ── BUY BUTTON ── */
+  document.getElementById('buyBtn')
+    ?.addEventListener('click', () => {
+      showPage('confirmedPage');
+    });
+
+  /* ── SUBSCRIBE BUTTON ── */
+  document.getElementById('subPayBtn')
+    ?.addEventListener('click', () => {
+      showToast('🎉 Anvaye Pass activated!');
+      setTimeout(() => showPage('homePage'), 1200);
+    });
+
+  /* ── SELLER SEARCH ── */
+  document.getElementById('sellerSearch')
+    ?.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.seller-card-wrap');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const name   = card.querySelector('.seller-card-name')
+                         ?.textContent.toLowerCase() || '';
+        const handle = card.querySelector('.seller-card-handle')
+                         ?.textContent.toLowerCase() || '';
+
+        if (!query || name.includes(query) || handle.includes(query)) {
+          card.style.display = 'block';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
       });
 
-    /* ── OVERRIDE BUY BTN ── */
-    document.getElementById('buyBtn')
-      ?.addEventListener('click', () => {
-        showPage('confirmedPage');
-      });
-
-    /* ── OVERRIDE SUB PAY BTN ── */
-    document.getElementById('subPayBtn')
-      ?.addEventListener('click', () => {
-        showToast('🎉 Anvaye Pass activated!');
-        setTimeout(() => showPage('homePage'), 1200);
-      });
-  </script>
+      const emptyState = document.getElementById('searchEmpty');
+      if (emptyState) {
+        emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+    });
+</script>
 
 </body>
 </html>
