@@ -1399,18 +1399,36 @@
     }
 
     /* ── OVERRIDE PHONE FORM ── */
-    document.getElementById('sellerPhoneForm')
+    document.getElementById('sellerOtpForm')
       ?.addEventListener('submit', (e) => {
         e.preventDefault();
-        const phone = document.getElementById('sellerPhoneInput')?.value.trim();
-        const phoneRegex = /^[6-9]\d{9}$/;
-        if (!phoneRegex.test(phone)) return;
+    
+        const inputs = document.querySelectorAll('.seller-otp-input');
+        const otp    = [...inputs].map(i => i.value).join('');
 
-        document.getElementById('sellerOtpSubText').textContent =
-          'Sent to +91 ' + phone;
+        // Strict 4-digit check
+        if (otp.length < 4 || !/^\d{4}$/.test(otp)) {
+          showToast('Please enter the 4-digit OTP', 'error');
+          inputs.forEach(inp => {
+            inp.style.borderColor = '#D85A30';
+            setTimeout(() => { inp.style.borderColor = ''; }, 1500);
+          });
+          return;
+        }
+    
+        // Show loading on button
+        const btn = e.target.querySelector('button[type="submit"]');
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = 'Verifying...';
+        btn.disabled  = true;
+    
+        setTimeout(() => {
+          btn.innerHTML = originalHTML;
+          btn.disabled  = false;
 
-        showToast('OTP sent to +91 ' + phone);
-        showPage('otpPage');
+          const store = localStorage.getItem('anvaye_store');
+          showPage(store ? 'dashboardPage' : 'onboardingPage');
+        }, 800);
       });
 
     /* ── OVERRIDE OTP FORM ── */
