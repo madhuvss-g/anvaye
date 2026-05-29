@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# GitHub Pages sitemap
 Sitemap: https://madhuvss-g.github.io/anvaye-website/sitemap.xml
+
+# Vercel sitemap — replace with your actual Vercel URL once you have it
+# Sitemap: https://your-project.vercel.app/sitemap.xml
