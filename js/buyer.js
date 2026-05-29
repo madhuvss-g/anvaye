@@ -78,15 +78,17 @@ function startResendTimer(
   }, 1000);
 }
 
-/* Start timer if resend button exists */
-if (document.getElementById('resendBtn')) {
-  startResendTimer('resendBtn', 'resendTimer', 30);
-}
-
+/* ── RESEND BUTTON ── */
 document.getElementById('resendBtn')
   ?.addEventListener('click', () => {
+    // Clear OTP inputs
+    document.querySelectorAll('.otp-input').forEach(inp => {
+      inp.value = '';
+    });
     showToast('OTP resent successfully!');
     startResendTimer('resendBtn', 'resendTimer', 30);
+    // Focus first input
+    document.querySelector('.otp-input')?.focus();
   });
 
 /* ── PHONE VALIDATION ── */
