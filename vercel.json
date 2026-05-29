@@ -1,22 +1,19 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-  "routes": [
+  "rewrites": [
+    { "source": "/buyer", "destination": "/buyer/index.html" },
+    { "source": "/seller", "destination": "/seller/index.html" }
+  ],
+  "redirects": [],
+  "headers": [
     {
-      "src": "/buyer",
-      "dest": "/buyer/index.html"
+      "source": "/css/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000" }]
     },
     {
-      "src": "/seller", 
-      "dest": "/seller/index.html"
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/404.html",
-      "status": 404
+      "source": "/js/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000" }]
     }
   ]
 }
