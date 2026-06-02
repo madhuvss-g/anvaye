@@ -21,5 +21,5 @@ Anvaye is a modern e-commerce platform connecting buyers with verified sellers. 
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/madhuvss-g/anvaye-website.git
-   cd anvaye-website
+   git clone https://github.com/madhuvss-g/anvaye.git
+   cd anvaye
